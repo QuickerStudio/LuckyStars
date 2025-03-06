@@ -1,6 +1,6 @@
 # LukyStars
 
-3 WPF&.NET8.C# LukyStars wallpaper
+ # WPF&.NET8.C# LukyStars wallpaper
 
                     #  Biuld by Github Copilot Pro
 
