@@ -58,8 +58,12 @@ Multi-monitor support
 ✅ Support for setting different wallpapers on different displays (enhancements)
 Wallpaper management
 
+
+
 ✅ Pause wallpaper playback while the system is sleeping
+
 ✅ Adjust the brightness and chromaticity of the wallpaper according to the screen information
+
 ✅ Enhancements to performance optimizations (e.g., detection of full-screen apps, etc.)
 Format conversion
 
