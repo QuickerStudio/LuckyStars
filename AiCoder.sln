@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Blend for Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiCoder", "AiCoder.csproj", "{2942CB6C-FFE3-43B6-BCF3-87F8D88B886C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2942CB6C-FFE3-43B6-BCF3-87F8D88B886C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2942CB6C-FFE3-43B6-BCF3-87F8D88B886C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2942CB6C-FFE3-43B6-BCF3-87F8D88B886C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2942CB6C-FFE3-43B6-BCF3-87F8D88B886C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B1516F0-7FFA-459E-8455-9F93FB0B16CA}
+	EndGlobalSection
+EndGlobal

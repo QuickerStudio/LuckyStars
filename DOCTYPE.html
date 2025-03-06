@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Interactive Particles</title>
+    <style>
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // 共享鼠标位置
+        const mouse = { x: null, y: null, maxDist: 200 };
+
+        // ================= 第一个粒子系统 =================
+        class ColorParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                this.type = Math.random() > 0.5 ? 'circle' : 'square';
+                this.collisionColor = null; // 新增碰撞颜色状态
+                this.collisionTimer = 0;    // 新增碰撞计时器
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                if (this.type === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillRect(this.x - this.size/2, this.y - this.size/2, this.size, this.size);
+                }
+            }
+
+            update() {
+                // 鼠标影响
+                if (mouse.x && mouse.y) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.maxDist) {
+                        this.speedX += dx * 0.0005;
+                        this.speedY += dy * 0.0005;
+                    }
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // 边界反弹（保持原有流畅性）
+                if (this.x > canvas.width - this.size) {
+                    this.speedX *= -0.8;
+                    this.x = canvas.width - this.size;
+                } else if (this.x < this.size) {
+                    this.speedX *= -0.8;
+                    this.x = this.size;
+                }
+
+                if (this.y > canvas.height - this.size) {
+                    this.speedY *= -0.8;
+                    this.y = canvas.height - this.size;
+                } else if (this.y < this.size) {
+                    this.speedY *= -0.8;
+                    this.y = this.size;
+                }
+
+                // 更新碰撞状态（新增）
+                if (this.collisionTimer > 0) {
+                    this.collisionTimer--;
+                    if (this.collisionTimer === 0) {
+                        this.collisionColor = null;
+                    }
+                }
+            }
+        }
+
+        // ================= 第二个粒子系统 =================
+        class DotParticle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.xa = Math.random() * 2 - 1;
+                this.ya = Math.random() * 2 - 1;
+                this.color = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                this.maxDist = 6000;
+                this.collisionColor = null; // 新增碰撞颜色状态
+                this.collisionTimer = 0;    // 新增碰撞计时器
+            }
+
+            update() {
+                // 鼠标影响
+                if (mouse.x && mouse.y) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = dx * dx + dy * dy;
+                    if (distance < this.maxDist) {
+                        this.xa += dx * 0.0002;
+                        this.ya += dy * 0.0002;
+                    }
+                }
+
+                this.x += this.xa;
+                this.y += this.ya;
+                this.xa *= (this.x > canvas.width || this.x < 0) ? -0.8 : 1;
+                this.ya *= (this.y > canvas.height || this.y < 0) ? -0.8 : 1;
+
+                // 更新碰撞状态（新增）
+                if (this.collisionTimer > 0) {
+                    this.collisionTimer--;
+                    if (this.collisionTimer === 0) {
+                        this.collisionColor = null;
+                    }
+                }
+            }
+        }
+
+        // ================= 系统初始化 =================
+        const colorParticles = Array.from({ length: 150 }, () => 
+            new ColorParticle(Math.random() * canvas.width, Math.random() * canvas.height)
+        );
+
+        const dotParticles = Array.from({ length: 99 }, () => 
+            new DotParticle()
+        );
+
+        // ================= 绘制逻辑（优化版） =================
+        function drawLines(particles, maxDistance) {
+            // 第一步：快速碰撞检测
+            const collisionPairs = new Set();
+            
+            // 使用平方距离优化性能
+            const checkDistance = Math.sqrt(maxDistance) * 0.8; // 预计算阈值
+            
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i];
+                    const b = particles[j];
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const distanceSq = dx*dx + dy*dy;
+
+                    if (distanceSq < (checkDistance * checkDistance)) {
+                        // 精确碰撞检测
+                        const realDistance = Math.sqrt(distanceSq);
+                        const minDist = (a.size || 1) + (b.size || 1);
+                        
+                        if (realDistance < minDist) {
+                            collisionPairs.add([a, b]);
+                            // 设置碰撞颜色（保持90%透明度）
+                            a.collisionColor = `hsla(${Math.random() * 360}, 70%, 50%, 0.9)`;
+                            b.collisionColor = a.collisionColor;
+                            a.collisionTimer = 10; // 维持10帧
+                            b.collisionTimer = 10;
+                        }
+                    }
+                }
+            }
+
+            // 第二步：绘制连线
+            particles.forEach(a => {
+                particles.forEach(b => {
+                    if (a === b) return;
+
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const distance = dx*dx + dy*dy;
+
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        
+                        // 优先使用碰撞颜色
+                        const lineColor = a.collisionColor || 
+                            `hsla(${a.color.split('hsl(')[1].split(')')[0]}, 0.2)`;
+                        
+                        ctx.strokeStyle = lineColor;
+                        ctx.lineWidth = 1 - (Math.sqrt(distance) / Math.sqrt(maxDistance));
+                        
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                });
+
+                // 鼠标连线保持原有逻辑
+                if (mouse.x && mouse.y) {
+                    const dx = a.x - mouse.x;
+                    const dy = a.y - mouse.y;
+                    const distance = dx*dx + dy*dy;
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `hsla(${a.color.split('hsl(')[1].split(')')[0]}, 0.2)`;
+                        ctx.lineWidth = 1 - (Math.sqrt(distance) / Math.sqrt(maxDistance));
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+        }
+
+        // ================= 保持动画循环流畅性 =================
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 更新并绘制第一个系统
+            colorParticles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawLines(colorParticles, 10000);
+
+            // 更新并绘制第二个系统
+            dotParticles.forEach(p => {
+                p.update();
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
+            });
+            drawLines(dotParticles, 6000);
+
+            requestAnimationFrame(animate);
+        }
+
+        // ================= 事件监听 =================
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            colorParticles.forEach(p => {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+            });
+            dotParticles.forEach(p => {
+                p.x = Math.random() * canvas.width;
+                p.y = Math.random() * canvas.height;
+            });
+        });
+
+        animate();
+    </script>
+</body>
+</html>
