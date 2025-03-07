@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\LuckyStars.csproj": {}
+    "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\LuckyStars.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\LuckyStars.csproj": {
+    "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\LuckyStars.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\LuckyStars.csproj",
+        "projectUniqueName": "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\LuckyStars.csproj",
         "projectName": "LuckyStars",
-        "projectPath": "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\LuckyStars.csproj",
+        "projectPath": "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\LuckyStars.csproj",
         "packagesPath": "C:\\Users\\Quick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\obj\\",
+        "outputPath": "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IxLMlv5OPbA=",
+  "dgSpecHash": "49cbhZRJpw4=",
   "success": false,
-  "projectFilePath": "C:\\Users\\Quick\\Desktop\\QuickerStudio\\LuckyStars\\LuckyStars.csproj",
+  "projectFilePath": "C:\\Users\\Quick\\Documents\\GitHub\\LukyStars\\LuckyStars.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Quick\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Quick\\.nuget\\packages\\microsoft.web.webview2\\1.0.3065.39\\microsoft.web.webview2.1.0.3065.39.nupkg.sha512",
