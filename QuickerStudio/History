@@ -13,7 +13,7 @@ LuckyStars/34
 │   ├── SlideshowManager.cs                                                Done            # 幻灯片播放管理器
 │   ├── FileManager.cs                                                           Done                 # 文件存储管理
 │   ├── ScreenManager.cs                                                      Done              # 屏幕状态监控
-│   ├── MultiMonitorWallpaperManager.cs                                                # 多显示器支持
+│   ├── MultiMonitorWallpaperManager.cs                                         Done        # 多显示器支持
 │   ├── WallpaperPerformanceManager.cs                             Done           # 性能优化管理
 │   └── FormatConverter.cs  8                                                Done               # 基础格式转换器
 ├── Utils/     # 工具类
