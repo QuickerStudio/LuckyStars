@@ -13,29 +13,29 @@ LuckyStars/34
 │   ├── SlideshowManager.cs                                                Done            # 幻灯片播放管理器
 │   ├── FileManager.cs                                                           Done                 # 文件存储管理
 │   ├── ScreenManager.cs                                                      Done              # 屏幕状态监控
-│   ├── MultiMonitorWallpaperManager.cs                                         Done        # 多显示器支持
-│   ├── WallpaperPerformanceManager.cs                             Done           # 性能优化管理
-│   └── FormatConverter.cs  8                                                Done               # 基础格式转换器
+│   ├── MultiMonitorWallpaperManager.cs        Done        # 多显示器支持
+│   ├── WallpaperPerformanceManager.cs         Done           # 性能优化管理
+│   └── FormatConverter.cs  8                  Done               # 基础格式转换器
 ├── Utils/     # 工具类
-│   ├── FileUtils.cs                                                                  Done        # 文件工具类
+│   ├── FileUtils.cs                           Done        # 文件工具类
 │   ├── FFmpegManager.cs                                                                            # FFmpeg管理器(包含版本管理)
 │   ├── FFmpegLogger.cs                                                                            # FFmpeg日志记录
-│   ├── FFmpegExecutor.cs                                                      Done       # FFmpeg命令执行
-│   ├── EnhancedFormatConverter.cs                                       Done#           增强格式转换
-│   ├── MediaTypeDetector.cs                                                  Done     # 媒体类型检测
-│   ├── FileTypeDetector.cs                                                                  # 文件类型检测
-│   ├── DependencyManager.cs                                               Done       # 依赖项管理
-│   ├── SystemHelper.cs                                                           Done        # 系统辅助工具
-│   └── WinAPI.cs  Done    10                                                     Done             # Windows API封装
+│   ├── FFmpegExecutor.cs                      Done       # FFmpeg命令执行
+│   ├── EnhancedFormatConverter.cs             Done#           增强格式转换
+│   ├── MediaTypeDetector.cs                   Done     # 媒体类型检测
+│   ├── FileTypeDetector.cs                    Done                # 文件类型检测
+│   ├── DependencyManager.cs                   Done       # 依赖项管理
+│   ├── SystemHelper.cs                        Done        # 系统辅助工具
+│   └── WinAPI.cs  Done    10                  Done             # Windows API封装
 ├── UI/   # 用户界面相关
-│   ├── NotifyIconManager.cs  1                                               Done    # 系统托盘图标管理
-│   └── Controls/                                                                                    # 自定义控件目录(如有)
-├── Models/                                                                                            # 数据模型
-│   ├── WallpaperInfo.cs                                                          Done      # 壁纸信息模型
-│   ├── ApplicationSettings.cs                                                   Done  # 应用设置模型
-│   └── MonitorInfo.cs       3                         # 监视器信息模型
-├── Resources/                                        # 资源文件
-│   ├── Images/                               # 图片资源
+│   ├── NotifyIconManager.cs  1                Done    # 系统托盘图标管理
+│   └── Controls/  # 自定义控件目录(如有)
+├── Models/ # 数据模型
+│   ├── WallpaperInfo.cs                       Done      # 壁纸信息模型
+│   ├── ApplicationSettings.cs                 Done  # 应用设置模型
+│   └── MonitorInfo.cs       3                 Done    # 监视器信息模型
+├── Resources/# 资源文件
+│   ├── Images/# 图片资源
 │   │   ├── app.ico                                    # 应用程序图标
 │   │   └── tray.ico     2                          # 托盘图标
 │   ├── FFmpeg/                                              # 内置FFmpeg目录
