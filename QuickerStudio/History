@@ -45,7 +45,3 @@ LuckyStars/34
 │   ├── launchSettings.json                    Done       # 启动设置   /// 随Windows启动//public bool AutoStartWithWindows 维护Windows自启动注册表项提供简单的自启动开关接口
 │   └── StartupManager                         Done       # 启动管理器
 └── LuckyStars.csproj       3                  Done       # 项目文件
-
-
-
-      
