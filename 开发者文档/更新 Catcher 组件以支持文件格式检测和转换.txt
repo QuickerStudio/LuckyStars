@@ -1,0 +1,593 @@
+using System;
+using System.IO;
+using System.Windows;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using LuckyStars.Core;
+using LuckyStars.Utils;
+using LuckyStars.Models;
+
+namespace LuckyStars
+{
+    /// <summary>
+    /// Catcher.xaml 的交互逻辑，用于接收拖放文件
+    /// </summary>
+    public partial class Catcher : Window
+    {
+        private readonly WallpaperManager _wallpaperManager;
+        private readonly FileManager _fileManager;
+        private readonly FormatConverter _formatConverter;
+        private readonly FFmpegExecutor _ffmpegExecutor;
+        
+        // 支持的文件格式
+        private readonly string[] _supportedImageFormats = { ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".webp" };
+        private readonly string[] _supportedVideoFormats = { ".mp4", ".webm" };
+        private readonly string[] _supportedHtmlFormats = { ".html", ".htm" };
+        
+        // 默认目标格式
+        private const string DEFAULT_IMAGE_FORMAT = ".png";
+        private const string DEFAULT_VIDEO_FORMAT = ".mp4";
+        
+        // 临时文件存储目录
+        private string _tempFolder;
+        
+        // 是否正在处理文件
+        private bool _isProcessingFile = false;
+        
+         public Catcher(WallpaperManager wallpaperManager, FileManager fileManager, 
+            FormatConverter formatConverter)
+        {
+            InitializeComponent();
+            
+            _wallpaperManager = wallpaperManager ?? throw new ArgumentNullException(nameof(wallpaperManager));
+            _fileManager = fileManager ?? throw new ArgumentNullException(nameof(fileManager));
+            _formatConverter = formatConverter ?? throw new ArgumentNullException(nameof(formatConverter));
+            
+            // 初始化FFmpeg执行器
+            string ffmpegPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tools", "ffmpeg.exe");
+            if (!File.Exists(ffmpegPath))
+            {
+                Debug.WriteLine("FFmpeg可执行文件未找到，部分格式可能无法转换");
+                ffmpegPath = null;
+            }
+            
+            try
+            {
+                if (!string.IsNullOrEmpty(ffmpegPath))
+                {
+                    _ffmpegExecutor = new FFmpegExecutor(ffmpegPath);
+                    _ffmpegExecutor.OutputReceived += (s, e) => Debug.WriteLine($"FFmpeg输出: {e}");
+                    _ffmpegExecutor.ErrorReceived += (s, e) => Debug.WriteLine($"FFmpeg错误: {e}");
+                    _ffmpegExecutor.TaskCompleted += (s, e) => Debug.WriteLine($"FFmpeg任务完成: {(e.Result.Success ? "成功" : "失败")}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"初始化FFmpeg执行器失败: {ex.Message}");
+            }
+            
+            // 初始化临时文件目录
+            _tempFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+                "LuckyStars", "Temp");
+                
+            if (!Directory.Exists(_tempFolder))
+            {
+                Directory.CreateDirectory(_tempFolder);
+            }
+            
+            // 设置窗口事件处理
+            this.AllowDrop = true;
+            this.Drop += Catcher_Drop;
+            this.DragEnter += Catcher_DragEnter;
+            this.Loaded += Catcher_Loaded;
+            this.Closed += Catcher_Closed;
+        }
+        
+        /// <summary>
+        /// 窗口加载时执行的操作
+        /// </summary>
+        private void Catcher_Loaded(object sender, RoutedEventArgs e)
+        {
+            // 获取主显示器的工作区域，使窗口在屏幕中心显示
+            var workArea = SystemParameters.WorkArea;
+            this.Left = workArea.Left + (workArea.Width - this.Width) / 2;
+            this.Top = workArea.Top + (workArea.Height - this.Height) / 2;
+            
+            // 显示提示信息
+            txtStatus.Text = "请将壁纸文件拖放到此处";
+        }
+        
+        /// <summary>
+        /// 窗口关闭时执行的操作
+        /// </summary>
+        private void Catcher_Closed(object sender, EventArgs e)
+        {
+            // 清理临时文件
+            try
+            {
+                CleanTempFiles();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"清理临时文件出错: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// 拖拽进入窗口时的处理
+        /// </summary>
+        private void Catcher_DragEnter(object sender, DragEventArgs e)
+        {
+            // 检查是否有文件被拖入
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && !_isProcessingFile)
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files != null && files.Length > 0 && File.Exists(files[0]))
+                {
+                    e.Effects = DragDropEffects.Copy;
+                    HighlightDropArea(true);
+                    return;
+                }
+            }
+            
+            e.Effects = DragDropEffects.None;
+            HighlightDropArea(false);
+        }
+        
+        /// <summary>
+        /// 文件拖放操作的处理
+        /// </summary>
+        private async void Catcher_Drop(object sender, DragEventArgs e)
+        {
+            // 重置高亮显示
+            HighlightDropArea(false);
+            
+            // 检查是否有文件被放入
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && !_isProcessingFile)
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                if (files != null && files.Length > 0 && File.Exists(files[0]))
+                {
+                    _isProcessingFile = true;
+                    await ProcessDroppedFileAsync(files[0]);
+                    _isProcessingFile = false;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 处理拖放的文件
+        /// </summary>
+        private async Task ProcessDroppedFileAsync(string filePath)
+        {
+            try
+            {
+                SetStatusText($"正在处理文件: {Path.GetFileName(filePath)}");
+                ShowProgressBar(true);
+                
+                // 检查文件类型
+                string fileExtension = Path.GetExtension(filePath).ToLowerInvariant();
+                MediaTypeDetector.MediaType mediaType = MediaTypeDetector.GetMediaType(filePath);
+                
+                // 按类型处理文件
+                string processedFilePath = filePath;
+                
+                switch (mediaType)
+                {
+                    case MediaTypeDetector.MediaType.Image:
+                    case MediaTypeDetector.MediaType.AnimatedGif:
+                        processedFilePath = await ProcessImageFileAsync(filePath, fileExtension);
+                        break;
+                        
+                    case MediaTypeDetector.MediaType.Video:
+                        processedFilePath = await ProcessVideoFileAsync(filePath, fileExtension);
+                        break;
+                        
+                    case MediaTypeDetector.MediaType.Web:
+                        processedFilePath = await ProcessHtmlFileAsync(filePath, fileExtension);
+                        break;
+                        
+                    default:
+                        // 尝试转换为图片
+                        SetStatusText("不支持的文件格式，尝试转换为图片...");
+                        processedFilePath = await TryConvertToDefaultImageAsync(filePath);
+                        break;
+                }
+                
+                if (processedFilePath != null && File.Exists(processedFilePath))
+                {
+                    // 应用壁纸
+                    await ApplyWallpaperAsync(processedFilePath);
+                }
+                else
+                {
+                    SetStatusText($"文件处理失败: {Path.GetFileName(filePath)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                SetStatusText($"处理文件时出错: {ex.Message}");
+                Debug.WriteLine($"处理拖放文件异常: {ex}");
+            }
+            finally
+            {
+                ShowProgressBar(false);
+            }
+        }
+        
+        /// <summary>
+        /// 处理图像文件
+        /// </summary>
+        private async Task<string> ProcessImageFileAsync(string filePath, string fileExtension)
+        {
+            try
+            {
+                // 检查是否为支持的格式
+                if (Array.IndexOf(_supportedImageFormats, fileExtension) >= 0)
+                {
+                    // 如果是已支持的格式，直接使用
+                    SetStatusText("图片格式支持，正在准备应用壁纸...");
+                    
+                    // 复制到图片存储目录
+                    return await CopyToStorageDirectoryAsync(filePath, "Images");
+                }
+                else
+                {
+                    // 需要转换为支持的格式
+                    SetStatusText($"正在将图片转换为{DEFAULT_IMAGE_FORMAT}格式...");
+                    
+                    // 使用FormatConverter转换
+                    string outputFolder = GetStoragePath("Images");
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    string outputPath = Path.Combine(outputFolder, $"{fileName}_{DateTime.Now.Ticks.ToString().Substring(10)}{DEFAULT_IMAGE_FORMAT}");
+                    
+                    // 尝试转换图片格式
+                    if (_formatConverter != null)
+                    {
+                        string convertedPath = await _formatConverter.ConvertImageFormatAsync(filePath, 
+                            System.Drawing.Imaging.ImageFormat.Png, outputFolder);
+                        
+                        if (!string.IsNullOrEmpty(convertedPath) && File.Exists(convertedPath))
+                        {
+                            return convertedPath;
+                        }
+                    }
+                    
+                    // 如果转换失败，尝试使用FFmpeg
+                    if (_ffmpegExecutor != null)
+                    {
+                        return await _ffmpegExecutor.ValidateAndConvertIfNeededAsync(
+                            filePath, DEFAULT_IMAGE_FORMAT, outputFolder);
+                    }
+                    
+                    // 如果所有转换方法都失败，返回原文件
+                    return filePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"处理图像文件出错: {ex.Message}");
+                return filePath;
+            }
+        }
+        
+        /// <summary>
+        /// 处理视频文件
+        /// </summary>
+        private async Task<string> ProcessVideoFileAsync(string filePath, string fileExtension)
+        {
+            try
+            {
+                // 检查是否为支持的格式
+                if (Array.IndexOf(_supportedVideoFormats, fileExtension) >= 0)
+                {
+                    // 如果是已支持的格式，直接使用
+                    SetStatusText("视频格式支持，正在准备应用壁纸...");
+                    
+                    // 复制到视频存储目录
+                    return await CopyToStorageDirectoryAsync(filePath, "Videos");
+                }
+                else
+                {
+                    // 需要转换为支持的格式
+                    SetStatusText($"正在将视频转换为{DEFAULT_VIDEO_FORMAT}格式...");
+                    
+                    // 使用FFmpeg转换视频
+                    if (_ffmpegExecutor != null)
+                    {
+                        string outputFolder = GetStoragePath("Videos");
+                        return await _ffmpegExecutor.ValidateAndConvertIfNeededAsync(
+                            filePath, DEFAULT_VIDEO_FORMAT, outputFolder);
+                    }
+                    else
+                    {
+                        // 如果没有FFmpeg，则尝试提取第一帧作为图片
+                        SetStatusText("无法转换视频，尝试提取视频帧作为壁纸...");
+                        
+                        if (_formatConverter != null)
+                        {
+                            string imagePath = await _formatConverter.ConvertVideoToImageAsync(filePath, GetStoragePath("Images"));
+                            if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                            {
+                                return imagePath;
+                            }
+                        }
+                    }
+                    
+                    // 如果所有转换方法都失败，返回原文件
+                    return filePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"处理视频文件出错: {ex.Message}");
+                return filePath;
+            }
+        }
+        
+        /// <summary>
+        /// 处理HTML文件
+        /// </summary>
+        private async Task<string> ProcessHtmlFileAsync(string filePath, string fileExtension)
+        {
+            try
+            {
+                // 检查是否为支持的格式
+                if (Array.IndexOf(_supportedHtmlFormats, fileExtension) >= 0)
+                {
+                    // HTML文件需要连同其资源一起复制
+                    SetStatusText("HTML文件格式支持，正在准备相关资源...");
+                    
+                    // 创建专用文件夹存放HTML及其资源
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    string htmlFolder = Path.Combine(GetStoragePath("HTML"), fileName);
+                    
+                    // 清理已有内容
+                    if (Directory.Exists(htmlFolder))
+                    {
+                        Directory.Delete(htmlFolder, true);
+                    }
+                    
+                    Directory.CreateDirectory(htmlFolder);
+                    
+                    // 复制HTML文件
+                    string targetPath = Path.Combine(htmlFolder, "index.html");
+                    await Task.Run(() => File.Copy(filePath, targetPath, true));
+                    
+                    // 检查相关资源目录是否存在
+                    string sourceDir = Path.GetDirectoryName(filePath);
+                    
+                    // 如果存在相关的资源文件夹，复制它们
+                    foreach (var resourceFolder in new[] { "css", "js", "images", "fonts" })
+                    {
+                        string resourcePath = Path.Combine(sourceDir, resourceFolder);
+                        if (Directory.Exists(resourcePath))
+                        {
+                            string targetResourcePath = Path.Combine(htmlFolder, resourceFolder);
+                            await Task.Run(() => FileUtils.CopyDirectory(resourcePath, targetResourcePath));
+                        }
+                    }
+                    
+                    return targetPath;
+                }
+                else
+                {
+                    // 不支持的格式，尝试转换为HTML
+                    SetStatusText("不支持的Web文件格式");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"处理HTML文件出错: {ex.Message}");
+                return filePath;
+            }
+        }
+        
+        /// <summary>
+        /// 尝试将文件转换为默认图片格式
+        /// </summary>
+        private async Task<string> TryConvertToDefaultImageAsync(string filePath)
+        {
+            try
+            {
+                // 尝试使用FFmpeg转换为默认图片格式
+                if (_ffmpegExecutor != null)
+                {
+                    string outputFolder = GetStoragePath("Images");
+                    return await _ffmpegExecutor.ValidateAndConvertIfNeededAsync(
+                        filePath, DEFAULT_IMAGE_FORMAT, outputFolder);
+                }
+                
+                // 如果没有FFmpeg，尝试使用FormatConverter
+                if (_formatConverter != null)
+                {
+                    string outputFolder = GetStoragePath("Images");
+                    string imagePath = await _formatConverter.ConvertVideoToImageAsync(filePath, outputFolder);
+                    if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                    {
+                        return imagePath;
+                    }
+                }
+                
+                // 所有转换方法都失败
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"尝试转换为默认图片格式出错: {ex.Message}");
+                return null;
+            }
+        }
+        
+        /// <summary>
+        /// 复制文件到存储目录
+        /// </summary>
+        private async Task<string> CopyToStorageDirectoryAsync(string filePath, string subDirectory)
+        {
+            try
+            {
+                // 获取对应的存储子目录
+                string targetDir = GetStoragePath(subDirectory);
+                
+                // 确保目录存在
+                if (!Directory.Exists(targetDir))
+                {
+                    Directory.CreateDirectory(targetDir);
+                }
+                
+                // 生成目标文件路径（使用原始文件名）
+                string fileName = Path.GetFileName(filePath);
+                string targetPath = Path.Combine(targetDir, $"{DateTime.Now.Ticks.ToString().Substring(10)}_{fileName}");
+                
+                // 如果目标文件已存在，添加时间戳
+                if (File.Exists(targetPath))
+                {
+                    string fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                    string extension = Path.GetExtension(fileName);
+                    targetPath = Path.Combine(targetDir, $"{fileNameWithoutExt}_{DateTime.Now.Ticks.ToString().Substring(10)}{extension}");
+                }
+                
+                // 复制文件
+                await Task.Run(() => File.Copy(filePath, targetPath, true));
+                
+                return targetPath;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"复制文件到存储目录出错: {ex.Message}");
+                return filePath; // 如果复制失败，返回原路径
+            }
+        }
+        
+        /// <summary>
+        /// 获取存储路径
+        /// </summary>
+        private string GetStoragePath(string subDirectory)
+        {
+            // 主目录: C:\Users\Quick\Documents\LuckyStarWallpaper\
+            string mainDirectory = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "LuckyStarWallpaper");
+                
+            // 检查主目录是否存在
+            if (!Directory.Exists(mainDirectory))
+            {
+                Directory.CreateDirectory(mainDirectory);
+            }
+            
+            // 创建子目录
+            string subDir = Path.Combine(mainDirectory, subDirectory);
+            if (!Directory.Exists(subDir))
+            {
+                Directory.CreateDirectory(subDir);
+            }
+            
+            return subDir;
+        }
+        
+        /// <summary>
+        /// 应用壁纸
+        /// </summary>
+        private async Task ApplyWallpaperAsync(string filePath)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    SetStatusText("壁纸文件不存在");
+                    return;
+                }
+                
+                SetStatusText($"正在应用壁纸: {Path.GetFileName(filePath)}");
+                
+                // 创建壁纸信息
+                var wallpaperInfo = new WallpaperInfo(filePath);
+                
+                // 应用壁纸
+                bool success = await _wallpaperManager.SetWallpaperAsync(wallpaperInfo);
+                
+                if (success)
+                {
+                    SetStatusText("壁纸应用成功");
+                    
+                    // 延迟1.5秒后关闭窗口
+                    await Task.Delay(1500);
+                    this.Close();
+                }
+                else
+                {
+                    SetStatusText("应用壁纸失败");
+                }
+            }
+            catch (Exception ex)
+            {
+                SetStatusText($"应用壁纸出错: {ex.Message}");
+                Debug.WriteLine($"应用壁纸异常: {ex}");
+            }
+        }
+        
+        /// <summary>
+        /// 设置状态文本
+        /// </summary>
+        private void SetStatusText(string text)
+        {
+            if (txtStatus != null)
+            {
+                txtStatus.Text = text;
+            }
+            Debug.WriteLine(text);
+        }
+        
+        /// <summary>
+        /// 显示或隐藏进度条
+        /// </summary>
+        private void ShowProgressBar(bool show)
+        {
+            if (progressBar != null)
+            {
+                progressBar.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+                progressBar.IsIndeterminate = show;
+            }
+        }
+        
+        /// <summary>
+        /// 高亮拖放区域
+        /// </summary>
+        private void HighlightDropArea(bool highlight)
+        {
+            if (dropPanel != null)
+            {
+                dropPanel.Background = highlight 
+                    ? System.Windows.Media.Brushes.LightBlue 
+                    : System.Windows.Media.Brushes.Transparent;
+            }
+        }
+        
+        /// <summary>
+        /// 清理临时文件
+        /// </summary>
+        private void CleanTempFiles()
+        {
+            if (Directory.Exists(_tempFolder))
+            {
+                try
+                {
+                    // 清理7天前的临时文件
+                    foreach (string file in Directory.GetFiles(_tempFolder))
+                    {
+                        FileInfo fileInfo = new FileInfo(file);
+                        if (DateTime.Now - fileInfo.CreationTime > TimeSpan.FromDays(7))
+                        {
+                            try { fileInfo.Delete(); } catch { }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"清理临时文件出错: {ex.Message}");
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.csproj.AssemblyReference.cache
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars_Content.g.cs
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars_MarkupCompile.cache
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.g.resources
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.AssemblyInfoInputs.cache
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.AssemblyInfo.cs
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars.csproj.CoreCompileInputs.cache
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\Catcher.g.cs
+C:\Users\Quick\Desktop\QuickerStudio\LuckyStars\obj\Debug\net8.0-windows\LuckyStars_MarkupCompile.lref

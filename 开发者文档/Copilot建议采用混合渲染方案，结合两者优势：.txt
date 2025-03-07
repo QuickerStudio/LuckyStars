@@ -1,0 +1,45 @@
+建议采用混合渲染方案，结合两者优势：// LuckyStars中的优化渲染器实现
+public class OptimizedWallpaperRenderer
+{
+    private readonly WebView2 webView;
+    private readonly Image imageView;
+    
+    public void SetWallpaper(string filePath, bool forceWebView = false)
+    {
+        var mediaType = MediaTypeDetector.GetMediaType(filePath);
+        var systemPerformance = SystemHelper.GetSystemPerformanceLevel();
+        
+        // 简单图片且系统性能不足时使用原生渲染
+        if (mediaType == MediaType.StaticImage && 
+            systemPerformance < PerformanceLevel.High && 
+            !forceWebView)
+        {
+            webView.Visibility = Visibility.Collapsed;
+            imageView.Visibility = Visibility.Visible;
+            imageView.Source = new BitmapImage(new Uri(filePath));
+        }
+        else
+        {
+            // 其他情况使用WebView2渲染
+            imageView.Visibility = Visibility.Collapsed;
+            webView.Visibility = Visibility.Visible;
+            
+            string html = GenerateAppropriateHtml(filePath, mediaType);
+            webView.NavigateToString(html);
+        }
+    }
+    
+    private string GenerateAppropriateHtml(string filePath, MediaType type)
+    {
+        // 根据媒体类型生成适当的HTML
+        switch (type)
+        {
+            case MediaType.Video:
+                return $"<html><body style='margin:0;overflow:hidden;'><video src='{filePath}' autoplay loop muted style='width:100%;height:100%;object-fit:cover;'></video></body></html>";
+            case MediaType.AnimatedGif:
+            case MediaType.StaticImage:
+                return $"<html><body style='margin:0;overflow:hidden;'><img src='{filePath}' style='width:100%;height:100%;object-fit:cover;'></body></html>";
+            // 其他类型处理...
+        }
+    }
+}

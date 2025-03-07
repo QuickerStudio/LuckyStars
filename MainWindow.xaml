@@ -1,0 +1,29 @@
+<Window x:Class="LuckyStars.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LuckyStars"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        Title="LuckyStars Wallpaper"
+        Topmost="False"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded"
+        WindowState="Normal"
+        ShowInTaskbar="False"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Grid>
+        <!-- 图片壁纸 -->
+        <Image x:Name="WallpaperImage" 
+               Stretch="UniformToFill" 
+               Visibility="Collapsed"/>
+
+        <!-- HTML壁纸 -->
+        <wv2:WebView2 x:Name="WallpaperWebView"
+                      Visibility="Collapsed"
+                      DefaultBackgroundColor="#00000000"/>
+    </Grid>
+</Window>
