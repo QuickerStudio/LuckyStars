@@ -4,7 +4,7 @@
 
                     # Infrastructure Biuld by Github Copilot Pro   
                     # Explore Wallpaper Layering build by Cline
-                    #The instructor is DeepSeek
+                    # The instructor is DeepSeek
        
     After 19 hours of hard work, Cline completed all the exploration 
     of wallpaper layering on her own, and his friends helped out!
