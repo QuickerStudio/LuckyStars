@@ -2,7 +2,14 @@
 
  # WPF&.NET8.C# LukyStars wallpaper
 
-                    #  Biuld by Github Copilot Pro
+                    # Infrastructure Biuld by Github Copilot Pro   
+                    # Explore Wallpaper Layering build by Cline
+                    #The instructor is DeepSeek
+       
+    After 19 hours of hard work, Cline completed all the exploration 
+    of wallpaper layering on her own, and his friends helped out!
+    Always remember March 9, 2025 at 1 a.m., an unforgettable moment, 
+    a project entirely developed by artificial intelligence.
 
 LuckyStars Desktop Theme App Interface & Functionality Analysis
 Designed interface
