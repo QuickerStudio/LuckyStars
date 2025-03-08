@@ -1,0 +1,297 @@
+### 文档1主要内容总结：
+1. **WallPaper Engine 技术细节**：
+   - WallPaper Engine 是一款功能强大的壁纸软件，支持静态、动态和互动壁纸。
+   - 互动壁纸可以与鼠标交互，实现动态效果。
+
+2. **Windows 桌面壁纸实现原理**：
+   - **桌面窗口层次**：Windows 桌面窗口层次包括 Progman、SHELLDLL_DefView 和 SysListView32 窗口。
+   - **嵌入窗口实现壁纸**：通过创建 WorkerW 窗口并将其嵌入到桌面图标下方，实现动态壁纸效果。
+   - **DWM（Desktop Window Manager）**：DWM 控制窗口透明效果，使用 DWM API 可以实现窗口透明、半透明等效果。
+
+3. **嵌入窗口的具体实现**：
+   - 通过向 Progman 窗口发送特定消息（0x052C）创建 WorkerW 窗口。
+   - 使用 `SetParent` 函数将壁纸窗口嵌入到 WorkerW 窗口中。
+
+4. **无法嵌入窗口的情况**：
+   - 在 XP 系统或未启用 DWM Composition 的情况下，无法使用嵌入窗口的方式实现动态壁纸。
+   - 通过 DLL 注入和钩子技术，可以在桌面父窗口的 `WM_ERASEBKGND` 消息中绘制背景。
+
+5. **WallPaper Engine 的壁纸类型**：
+   - 支持 Web、Scene、Video、Picture、EXE 等多种类型的壁纸。
+   - Web 和 Scene 类型的壁纸可以实现互动效果。
+
+6. **动态壁纸的其他问题**：
+   - **鼠标事件响应**：通过钩子技术获取桌面鼠标消息，并将其发送给壁纸窗口。
+   - **桌面整理软件遮挡问题**：通过将桌面整理窗口设置为透明，避免遮挡动态壁纸。
+
+7. **总结**：
+   - 文档详细介绍了 Windows 桌面壁纸的实现原理，特别是动态壁纸和互动壁纸的技术细节。
+   - 通过嵌入窗口、DWM API 和钩子技术，可以实现复杂的桌面壁纸效果。
+
+### 文档2主要内容总结：
+1. **动态壁纸功能实现**：
+   - 动态壁纸功能主要通过操作 Windows 桌面窗口层次结构实现，而不依赖传统的壁纸设置机制。
+   - 主要使用 Win32 API 如 `FindWindow`、`EnumWindows` 和 `SetParent` 来操作窗口。
+
+2. **WorkerW 窗口技术**：
+   - 通过查找和创建特殊的 WorkerW 窗口，将壁纸窗口嵌入到桌面图标下方。
+   - 使用 `SendMessageTimeout` 发送消息让系统创建 WorkerW 窗口。
+
+3. **多种渲染引擎**：
+   - 视频播放：使用 DirectX/DirectShow 或 LibVLC 进行视频解码和渲染。
+   - 网页内容：使用嵌入式 Chromium (CEF) 引擎。
+   - 应用程序：通过捕获程序窗口并重定向显示。
+
+4. **设置壁纸窗口在桌面图标下方的实现方式**：
+   - **方法一**：通过 Explorer 桌面窗口层次结构，找到 Progman 窗口并发送消息创建 WorkerW 窗口，然后将壁纸窗口设置为 WorkerW 的子窗口。
+   - **方法四**：创建透明窗口并置于桌面最底层，通过设置窗口样式和位置实现壁纸效果。
+
+5. **总结**：
+   - 文档介绍了动态壁纸的多种实现方式，特别是通过操作 Windows 桌面窗口层次结构来实现壁纸效果。
+   - 提供了具体的代码示例和实现步骤，帮助开发者理解如何将壁纸窗口嵌入到桌面图标下方。
+
+### 综合总结：
+两篇文档都详细介绍了 Windows 桌面壁纸的实现原理，特别是动态壁纸和互动壁纸的技术细节。文档1侧重于 WallPaper Engine 的技术实现，详细解释了如何通过嵌入窗口和 DWM API 实现动态壁纸效果。文档2则提供了更多具体的代码示例和实现步骤，介绍了如何通过操作 Windows 桌面窗口层次结构来实现动态壁纸。两者都强调了 WorkerW 窗口的重要性，并提供了多种实现方式，帮助开发者理解并实现复杂的桌面壁纸效果。
+：
+cpp
+BOOL IsAeroEnabled()
+{
+    BOOL bEnabled = FALSE;
+    typedef HRESULT(__stdcall *fnDwmIsCompositionEnabled)(BOOL* pfEnabled);
+    HMODULE hModuleDwm = LoadLibrary(_T("Dwmapi.dll"));
+    if (hModuleDwm != 0)
+    {
+        fnDwmIsCompositionEnabled pFunc = (fnDwmIsCompositionEnabled)GetProcAddress(hModuleDwm, "DwmIsCompositionEnabled");
+        if (pFunc != 0)
+        {
+            BOOL result = FALSE;
+            if (pFunc(&result) == S_OK)
+            {
+                bEnabled = result;
+            }
+        }
+        FreeLibrary(hModuleDwm);
+        hModuleDwm = 0;
+    }
+    return bEnabled;
+}
+获取WorkerW1和WorkerW2窗口句柄：
+cpp
+BOOL CALLBACK CBFindWorkerW1(HWND hWnd, LPARAM lp)
+{
+    if (lp == NULL) return FALSE;
+
+    HWND hShl = NULL;
+    hShl = ::FindWindowEx(hWnd, 0, _T("SHELLDLL_DefView"), 0);
+    
+    if (hShl)
+    {
+        CString strClass;
+        GetClassName(hWnd, strClass.GetBuffer(32), 31);
+        strClass.ReleaseBuffer();
+        if (strClass == _T("WorkerW"))
+        {
+            *(HWND*)lp = hWnd;
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+HWND GetDesktopWorkerW1()
+{
+    HWND hWork1 = NULL;
+    EnumWindows(CBFindWorkerW1, (LPARAM)&hWork1);
+    return hWork1;
+}
+
+HWND GetDesktopWorkerW2()
+{
+    HWND hWorkerW1 = GetDesktopWorkerW1();
+    if (!::IsWindow(hWorkerW1)) return NULL;
+
+    HWND hWorkWWnd = ::FindWindowEx(0, hWorkerW1, _T("WorkerW"), NULL);
+    return hWorkWWnd;
+}
+发送消息创建透明WorkerW窗口：
+cpp
+BOOL MakeDesktopTransparent()
+{
+    HWND hWndShlMain = ::FindWindow(_T("Progman"), NULL);
+    ::SendMessage(hWndShlMain, 0x052C, 0xD, 0);
+    ::SendMessage(hWndShlMain, 0x052C, 0xD, 1);
+    HWND hWorkW = 0;
+    hWorkW = GetDesktopWorkerW1();
+    if (hWorkW == 0)
+    {
+        OutputDebugString(_T("Can't find the WorkW window, try again!"));
+        ::SendMessage(hWndShlMain, 0x52c, 0, 0);
+        hWorkW = GetDesktopWorkerW1();
+    }
+
+    return hWorkW != NULL;
+}
+嵌入窗口到桌面：
+cpp
+{
+    MakeDesktopTransparent();
+    HWND hWorker2 = GetDesktopWorkerW2();
+    ::ShowWindow(hWorker2, SW_HIDE);
+    
+    HWND hWndShlMain = ::FindWindow(_T("Progman"), _T("Program Manager"));
+    ::SetParent((HWND)0x00F415C8, hWndShlMain);
+}
+文档2中的代码：
+通过Explorer桌面窗口层次结构设置壁纸窗口：
+csharp
+public static IntPtr SetupWallpaperWindow()
+{
+    // 1. 找到Progman窗口
+    IntPtr progman = FindWindow("Progman", null);
+    
+    // 2. 发送特殊消息，让系统创建WorkerW窗口
+    SendMessageTimeout(progman, 0x052C, IntPtr.Zero, IntPtr.Zero, 
+                      SMTO_NORMAL, 1000, out _);
+    
+    // 3. 查找包含SHELLDLL_DefView的WorkerW
+    IntPtr workerW = FindWindowEx(IntPtr.Zero, IntPtr.Zero, "WorkerW", null);
+    while (workerW != IntPtr.Zero)
+    {
+        IntPtr shelldll = FindWindowEx(workerW, IntPtr.Zero, "SHELLDLL_DefView", null);
+        if (shelldll != IntPtr.Zero)
+        {
+            // 找到包含桌面图标的WorkerW窗口
+            // 下一个WorkerW就是我们需要的目标窗口
+            IntPtr folderView = FindWindowEx(shelldll, IntPtr.Zero, "SysListView32", "FolderView");
+            if (folderView != IntPtr.Zero)
+            {
+                IntPtr target = FindWindowEx(IntPtr.Zero, workerW, "WorkerW", null);
+                return target; // 返回目标窗口句柄
+            }
+        }
+        workerW = FindWindowEx(IntPtr.Zero, workerW, "WorkerW", null);
+    }
+    return IntPtr.Zero;
+}
+
+// 创建并设置壁纸窗口
+public static void CreateWallpaper(Form wallpaperForm)
+{
+    IntPtr targetWindow = SetupWallpaperWindow();
+    if (targetWindow != IntPtr.Zero)
+    {
+        // 将壁纸窗口设为目标WorkerW的子窗口
+        SetParent(wallpaperForm.Handle, targetWindow);
+        
+        // 设置窗口样式，使其填满整个区域
+        SetWindowLong(wallpaperForm.Handle, GWL_STYLE, 
+                      (int)(WindowStyles.WS_VISIBLE | WindowStyles.WS_CHILD));
+    }
+}
+自定义窗口作为壁纸（替代方案）：
+csharp
+public static void CreateBackgroundWindow(Form wallpaperForm)
+{
+    // 1. 设置窗口样式为工具窗口并置底
+    wallpaperForm.FormBorderStyle = FormBorderStyle.None;
+    wallpaperForm.ShowInTaskbar = false;
+    
+    // 2. 使窗口可穿透鼠标点击
+    int exStyle = GetWindowLong(wallpaperForm.Handle, GWL_EXSTYLE);
+    exStyle |= WS_EX_TRANSPARENT | WS_EX_LAYERED;
+    SetWindowLong(wallpaperForm.Handle, GWL_EXSTYLE, exStyle);
+    
+    // 3. 置于底层
+    SetWindowPos(wallpaperForm.Handle, HWND_BOTTOM, 0, 0, 
+                Screen.PrimaryScreen.Bounds.Width, 
+                Screen.PrimaryScreen.Bounds.Height, 
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                
+    // 注意：此方法下，桌面图标会在窗口上方，但点击桌面时会被窗口拦截
+}
+总结：
+文档1和文档2中的代码片段展示了如何通过操作 Windows 桌面窗口层次结构来实现动态壁纸效果。文档1主要使用 C++ 实现，而文档2使用 C# 实现。核心思想是通过查找和操作 WorkerW 窗口，将壁纸窗口嵌入到桌面图标下方，从而实现动态壁纸效果。
+要将 MainWindow 设置为位于 WorkerW 窗口（桌面壁纸）和桌面图标之间，可以按照以下步骤实现：
+
+步骤：
+找到 Progman 窗口：
+使用 FindWindow API 找到 Progman 窗口句柄。
+发送消息创建 WorkerW 窗口：
+向 Progman 窗口发送 0x052C 消息，系统会创建两个 WorkerW 窗口。
+找到目标 WorkerW 窗口：
+使用 FindWindowEx 和 EnumWindows 找到包含桌面图标的 WorkerW 窗口（WorkerW1）和其下方的 WorkerW 窗口（WorkerW2）。
+将 MainWindow 设置为 WorkerW2 的子窗口：
+使用 SetParent 将 MainWindow 的父窗口设置为 WorkerW2。
+调整窗口样式和位置：
+使用 SetWindowLong 和 SetWindowPos 调整 MainWindow 的样式和位置，使其覆盖整个桌面。
+关键 API：
+FindWindow：
+查找窗口句柄。
+cpp
+HWND FindWindow(LPCSTR lpClassName, LPCSTR lpWindowName);
+SendMessageTimeout：
+发送消息创建 WorkerW 窗口。
+cpp
+LRESULT SendMessageTimeout(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam, UINT fuFlags, UINT uTimeout, PDWORD_PTR lpdwResult);
+FindWindowEx：
+查找子窗口句柄。
+cpp
+HWND FindWindowEx(HWND hwndParent, HWND hwndChildAfter, LPCSTR lpszClass, LPCSTR lpszWindow);
+SetParent：
+设置窗口的父窗口。
+cpp
+HWND SetParent(HWND hWndChild, HWND hWndNewParent);
+SetWindowLong：
+设置窗口样式。
+cpp
+LONG SetWindowLong(HWND hWnd, int nIndex, LONG dwNewLong);
+SetWindowPos：
+调整窗口位置和大小。
+cpp
+BOOL SetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags);
+示例代码：
+cpp
+#include <windows.h>
+
+// 找到目标 WorkerW 窗口
+HWND FindTargetWorkerW()
+{
+    // 找到 Progman 窗口
+    HWND progman = FindWindow("Progman", NULL);
+    if (!progman) return NULL;
+
+    // 发送消息创建 WorkerW 窗口
+    SendMessageTimeout(progman, 0x052C, 0, 0, SMTO_NORMAL, 1000, NULL);
+
+    // 查找包含 SHELLDLL_DefView 的 WorkerW 窗口
+    HWND workerW = NULL;
+    while ((workerW = FindWindowEx(NULL, workerW, "WorkerW", NULL)) != NULL)
+    {
+        HWND shelldll = FindWindowEx(workerW, NULL, "SHELLDLL_DefView", NULL);
+        if (shelldll)
+        {
+            // 找到目标 WorkerW 窗口
+            HWND target = FindWindowEx(NULL, workerW, "WorkerW", NULL);
+            return target;
+        }
+    }
+    return NULL;
+}
+
+// 设置 MainWindow 到 WorkerW 和桌面图标之间
+void SetMainWindowAsWallpaper(HWND hMainWindow)
+{
+    // 找到目标 WorkerW 窗口
+    HWND targetWorkerW = FindTargetWorkerW();
+    if (!targetWorkerW) return;
+
+    // 将 MainWindow 设置为 WorkerW 的子窗口
+    SetParent(hMainWindow, targetWorkerW);
+
+    // 设置窗口样式和位置
+    SetWindowLong(hMainWindow, GWL_STYLE, WS_VISIBLE | WS_CHILD);
+    SetWindowPos(hMainWindow, NULL, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN), SWP_NOZORDER | SWP_NOACTIVATE);
+}
+总结：
+通过上述步骤和代码，可以将 MainWindow 设置为位于桌面壁纸和桌面图标之间。核心是找到 WorkerW 窗口并使用 SetParent 将 MainWindow 嵌入到正确的位置。
