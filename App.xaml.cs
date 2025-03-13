@@ -1,323 +1,370 @@
+#nullable enable
+
+using Microsoft.Win32;
 using System;
-using System.IO;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
-using System.Windows.Threading;
-using LuckyStars.Core;
-using LuckyStars.Utils;
-using LuckyStars.UI;
+using System.Windows.Interop;
 
 namespace LuckyStars
 {
-    /// <summary>
-    /// App.xaml 的交互逻辑
-    /// </summary>
     public partial class App : Application
     {
-        // 应用程序实例
-        public static App Instance => (App)Current;
-        
-        // 应用程序数据目录
-        public string AppDataDirectory { get; private set; }
-        
-        // 壁纸存储目录
-        public string WallpaperDirectory { get; private set; }
-        
-        // FFmpeg管理器
-        public FFmpegManager FFmpegManager { get; private set; }
-        
-        // 壁纸管理器
-        public WallpaperManager WallpaperManager { get; private set; }
-        
-        // 系统托盘管理器
-        public NotifyIconManager NotifyIconManager { get; private set; }
-        
-        // 性能管理器
-        public WallpaperPerformanceManager PerformanceManager { get; private set; }
-        
-        // 多显示器管理器
-        public MultiMonitorWallpaperManager MonitorManager { get; private set; }
-        
+        // 窗口样式常量
+        private const int GWL_STYLE = -16;
+        private const int GWL_EXSTYLE = -20;
+        private const int WS_EX_TOOLWINDOW = 0x00000080;
+        private const int WS_EX_NOACTIVATE = 0x08000000;
+        private const int WS_EX_TRANSPARENT = 0x00000020;
+        private const int WS_CHILD = 0x40000000;
+        private const int HWND_BOTTOM = 1;
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOACTIVATE = 0x0010;
+
+        // 壁纸恢复API
+        private const int SPI_SETDESKWALLPAPER = 0x0014;
+        private const int SPIF_UPDATEINIFILE = 0x01;
+        private const int SPIF_SENDCHANGE = 0x02;
+
+        // 指定正确的库导入
+        [LibraryImport("user32.dll", EntryPoint = "FindWindowW", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+        private static partial IntPtr FindWindow(
+            [MarshalAs(UnmanagedType.LPWStr)] string? lpClassName,
+            [MarshalAs(UnmanagedType.LPWStr)] string? lpWindowName);
+
+        [LibraryImport("user32.dll", EntryPoint = "FindWindowExW", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+        private static partial IntPtr FindWindowEx(
+            IntPtr parentHandle,
+            IntPtr childAfter,
+            [MarshalAs(UnmanagedType.LPWStr)] string? className,
+            [MarshalAs(UnmanagedType.LPWStr)] string? windowTitle);
+
+        [LibraryImport("user32.dll", EntryPoint = "SystemParametersInfoW", StringMarshalling = StringMarshalling.Utf16, SetLastError = true)]
+        private static partial int SystemParametersInfo(
+            int uAction,
+            int uParam,
+            [MarshalAs(UnmanagedType.LPWStr)] string? lpvParam,
+            int fuWinIni);
+
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowPos", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static partial bool SetWindowPos(
+            IntPtr hWnd,
+            IntPtr hWndInsertAfter,
+            int X,
+            int Y,
+            int cx,
+            int cy,
+            uint uFlags);
+
+        [LibraryImport("user32.dll", EntryPoint = "SetParent", SetLastError = true)]
+        private static partial IntPtr SetParent(
+            IntPtr hWndChild,
+            IntPtr hWndNewParent);
+
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowLongW", SetLastError = true)]
+        private static partial int SetWindowLong(
+            IntPtr hWnd,
+            int nIndex,
+            int dwNewLong);
+
+        [LibraryImport("user32.dll", EntryPoint = "GetDesktopWindow", SetLastError = true)]
+        private static partial IntPtr GetDesktopWindow();
+
+        [LibraryImport("user32.dll", EntryPoint = "SendMessageTimeoutW", SetLastError = true)]
+        private static partial uint SendMessageTimeout(
+            IntPtr hWnd,
+            uint Msg,
+            IntPtr wParam,
+            IntPtr lParam,
+            uint fuFlags,
+            uint uTimeout,
+            out IntPtr lpdwResult);
+
+        private MainWindow? mainWindow;
+        private IntPtr _desktopHandle = IntPtr.Zero;
+        private static Mutex? _mutex;
+        private static readonly object _mutexLock = new();
+        private static bool _mutexAcquired = false;
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            
-            // 初始化异常处理
-            InitializeExceptionHandling();
-            
-            // 初始化应用程序目录
-            InitializeDirectories();
-            
-            // 初始化核心管理器
-            InitializeManagers();
-            
-            // 初始化系统托盘
-            InitializeNotifyIcon();
-            
-            // 启动后台服务
-            StartBackgroundServices();
-        }
-        
-        /// <summary>
-        /// 初始化异常处理
-        /// </summary>
-        private void InitializeExceptionHandling()
-        {
-            // UI线程未捕获异常处理
-            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
-            
-            // 非UI线程未捕获异常处理
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            
-            // Task未捕获异常处理
-            System.Threading.Tasks.TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-        }
-        
-        /// <summary>
-        /// 初始化应用程序目录
-        /// </summary>
-        private void InitializeDirectories()
-        {
-            // 应用数据根目录
-            AppDataDirectory = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "LuckyStarsWallpaper");
-                
-            // 壁纸存储目录
-            WallpaperDirectory = Path.Combine(AppDataDirectory, "Wallpapers");
-            
-            // 确保目录存在
-            Directory.CreateDirectory(AppDataDirectory);
-            Directory.CreateDirectory(WallpaperDirectory);
-            Directory.CreateDirectory(Path.Combine(WallpaperDirectory, "picture"));
-            Directory.CreateDirectory(Path.Combine(WallpaperDirectory, "html"));
-            Directory.CreateDirectory(Path.Combine(AppDataDirectory, "Logs"));
-            Directory.CreateDirectory(Path.Combine(AppDataDirectory, "Temp"));
-        }
-        
-        /// <summary>
-        /// 初始化核心管理器
-        /// </summary>
-        private void InitializeManagers()
-        {
             try
             {
-                // 初始化FFmpeg管理器
-                FFmpegManager = new FFmpegManager(AppDataDirectory);
-                
-                // 检查FFmpeg是否需要回退到备份版本
-                FFmpegManager.CheckForRollback();
-                
-                // 初始化多显示器管理器
-                MonitorManager = new MultiMonitorWallpaperManager();
-                
-                // 初始化性能管理器
-                var performanceSettings = new WallpaperPerformanceManager.PerformanceSettings
+                lock (_mutexLock)
                 {
-                    PauseOnBattery = false,
-                    PauseOnFullscreen = true,
-                    PauseOnHighCpu = true,
-                    CpuThreshold = 85,
-                    Mode = WallpaperPerformanceManager.PerformanceMode.Balanced
+                    _mutex = new Mutex(true, "LuckyStarsWallpaper", out bool createdNew);
+                    _mutexAcquired = createdNew;
+
+                    if (!_mutexAcquired)
+                    {
+                        MessageBox.Show("程序已在运行！");
+                        Current.Shutdown();
+                        return;
+                    }
+                }
+
+                base.OnStartup(e);
+
+                // 获取桌面父窗口句柄
+                _desktopHandle = GetDesktopParentHandle();
+                if (_desktopHandle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException("无法获取桌面窗口句柄");
+                }
+
+                mainWindow = new MainWindow();
+
+                mainWindow.SourceInitialized += (s, e2) =>
+                {
+                    var mainHelper = new WindowInteropHelper(mainWindow);
+
+                    if (mainHelper.Handle == IntPtr.Zero)
+                    {
+                        throw new InvalidOperationException("主窗口句柄无效");
+                    }
+
+                    // 附加到桌面
+                    if (SetParent(mainHelper.Handle, _desktopHandle) == IntPtr.Zero)
+                    {
+                        throw new InvalidOperationException("无法设置父窗口");
+                    }
+
+                    // 设置窗口样式
+                    _ = SetWindowLong(mainHelper.Handle, GWL_STYLE, WS_CHILD);
+                    _ = SetWindowLong(mainHelper.Handle, GWL_EXSTYLE, WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE);
+
+                    // 设置窗口位置
+                    if (!SetWindowPos(
+                        mainHelper.Handle,
+                        new IntPtr(HWND_BOTTOM),
+                        0,
+                        0,
+                        0,
+                        0,
+                        SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE))
+                    {
+                        throw new InvalidOperationException("无法设置窗口层级");
+                    }
                 };
-                
-                PerformanceManager = new WallpaperPerformanceManager(performanceSettings);
-                PerformanceManager.WallpaperPauseStateChanged += PerformanceManager_WallpaperPauseStateChanged;
-                
-                // 初始化壁纸管理器
-                WallpaperManager = new WallpaperManager(
-                    WallpaperDirectory,
-                    MonitorManager,
-                    FFmpegManager,
-                    PerformanceManager);
+
+                mainWindow.Show();
+
+                // 托盘程序窗口
+                var trayHost = new TrayIconHostWindow(mainWindow, new System.Windows.Forms.Timer());
+                trayHost.Show();
+
+                // 注册窗口重置事件
+                SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"初始化核心管理器时出错: {ex.Message}", "初始化错误", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"应用程序启动失败: {ex.Message}");
+                Current.Shutdown();
             }
         }
-        
-        /// <summary>
-        /// 初始化系统托盘
-        /// </summary>
-        private void InitializeNotifyIcon()
+
+        // 将此方法标记为 static。它不使用实例字段或方法
+        private static IntPtr GetDesktopParentHandle()
         {
             try
             {
-                NotifyIconManager = new NotifyIconManager();
-                NotifyIconManager.Initialize();
-                
-                // 注册托盘事件
-                NotifyIconManager.ExitRequested += NotifyIconManager_ExitRequested;
-                NotifyIconManager.TogglePlayPauseRequested += NotifyIconManager_TogglePlayPauseRequested;
-                NotifyIconManager.FileDropped += NotifyIconManager_FileDropped;
+                IntPtr progman = FindWindow("Progman", null);
+                if (progman == IntPtr.Zero)
+                {
+                    MessageBox.Show("无法找到Progman窗口，尝试直接使用桌面窗口");
+                    return GetDesktopWindow();
+                }
+
+                _ = SendMessageTimeout(
+                    progman,
+                    0x052C,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    0,
+                    1000,
+                    out IntPtr result);
+
+                // 内联变量声明 (IDE0018)
+                IntPtr workerW1 = IntPtr.Zero, workerW2 = IntPtr.Zero;
+                int retryCount = 0;
+
+                while (retryCount < 3)
+                {
+                    while ((workerW1 = FindWindowEx(IntPtr.Zero, workerW1, "WorkerW", null)) != IntPtr.Zero)
+                    {
+                        IntPtr defView = FindWindowEx(workerW1, IntPtr.Zero, "SHELLDLL_DefView", null);
+                        if (defView != IntPtr.Zero)
+                        {
+                            workerW2 = FindWindowEx(IntPtr.Zero, workerW1, "WorkerW", null);
+                            if (workerW2 != IntPtr.Zero)
+                            {
+                                return workerW2;
+                            }
+                        }
+                    }
+
+                    retryCount++;
+                    if (retryCount < 3)
+                    {
+                        Thread.Sleep(500);
+                        _ = SendMessageTimeout(
+                            progman,
+                            0x052C,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            0,
+                            1000,
+                            out result);
+                    }
+                }
+
+                return progman;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"初始化系统托盘时出错: {ex.Message}", "初始化错误", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"获取桌面句柄失败: {ex.Message}");
+                return IntPtr.Zero;
             }
         }
-        
-        /// <summary>
-        /// 启动后台服务
-        /// </summary>
-        private void StartBackgroundServices()
+
+        private void OnDisplaySettingsChanged(object? sender, EventArgs e)
         {
             try
             {
-                // 检查FFmpeg更新
-                FFmpegManager.CheckForUpdatesAsync();
-                
-                // 初始化多显示器检测
-                MonitorManager.Initialize();
-                
-                // 启动性能监控
-                PerformanceManager.StartMonitoring();
+                if (mainWindow != null && _desktopHandle != IntPtr.Zero)
+                {
+                    var mainHelper = new WindowInteropHelper(mainWindow);
+
+                    if (SetParent(mainHelper.Handle, _desktopHandle) == IntPtr.Zero)
+                    {
+                        throw new InvalidOperationException("无法重新设置父窗口");
+                    }
+
+                    SetWindowPos(
+                        mainHelper.Handle,
+                        new IntPtr(HWND_BOTTOM),
+                        0,
+                        0,
+                        0,
+                        0,
+                        SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"启动后台服务时出错: {ex.Message}", "初始化错误", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"窗口重置失败: {ex.Message}");
             }
         }
-        
-        /// <summary>
-        /// 性能管理器壁纸暂停状态变更
-        /// </summary>
-        private void PerformanceManager_WallpaperPauseStateChanged(object sender, WallpaperPerformanceManager.PauseReason reason)
-        {
-            try
-            {
-                bool shouldPause = (reason != WallpaperPerformanceManager.PauseReason.None);
-                
-                WallpaperManager.SetPaused(shouldPause, reason.ToString());
-                
-                // 更新托盘图标状态
-                NotifyIconManager?.UpdatePauseState(shouldPause);
-            }
-            catch (Exception ex)
-            {
-                // 记录错误但不中断程序
-                System.Diagnostics.Debug.WriteLine($"处理暂停状态变更时出错: {ex.Message}");
-            }
-        }
-        
-        /// <summary>
-        /// 托盘文件拖放处理
-        /// </summary>
-        private void NotifyIconManager_FileDropped(object sender, string[] files)
-        {
-            if (files == null || files.Length == 0)
-                return;
-                
-            WallpaperManager.SetWallpaperFromFile(files[0]);
-        }
-        
-        /// <summary>
-        /// 托盘切换播放/暂停状态
-        /// </summary>
-        private void NotifyIconManager_TogglePlayPauseRequested(object sender, EventArgs e)
-        {
-            WallpaperManager.TogglePause();
-            NotifyIconManager.UpdatePauseState(WallpaperManager.IsPaused);
-        }
-        
-        /// <summary>
-        /// 托盘退出请求
-        /// </summary>
-        private void NotifyIconManager_ExitRequested(object sender, EventArgs e)
-        {
-            Shutdown();
-        }
-        
-        /// <summary>
-        /// 应用程序退出
-        /// </summary>
+
         protected override void OnExit(ExitEventArgs e)
         {
             try
             {
-                // 清理托盘图标
-                NotifyIconManager?.Dispose();
-                
-                // 停止性能监控
-                PerformanceManager?.StopMonitoring();
-                PerformanceManager?.Dispose();
-                
-                // 清理多显示器管理器
-                MonitorManager?.Dispose();
-                
-                // 清理壁纸
-                WallpaperManager?.Dispose();
+                // 静态方法调用
+                RestoreWallpaper();
+                mainWindow?.Close();
+                ReleaseResources();
             }
             catch (Exception ex)
             {
-                // 记录错误但不中断退出
-                System.Diagnostics.Debug.WriteLine($"应用退出时出错: {ex.Message}");
+                MessageBox.Show($"程序退出时发生错误: {ex.Message}");
             }
-            
-            base.OnExit(e);
+            finally
+            {
+                base.OnExit(e);
+            }
         }
-        
-        #region 异常处理
-        
-        /// <summary>
-        /// UI线程未捕获异常处理
-        /// </summary>
-        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+
+        // 将此方法标记为 static（不访问实例字段）
+        private static void RestoreWallpaper()
         {
-            HandleException("UI线程异常", e.Exception);
-            e.Handled = true; // 标记为已处理，防止应用崩溃
-        }
-        
-        /// <summary>
-        /// 非UI线程未捕获异常处理
-        /// </summary>
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            HandleException("非UI线程异常", e.ExceptionObject as Exception);
-        }
-        
-        /// <summary>
-        /// Task未捕获异常处理
-        /// </summary>
-        private void TaskScheduler_UnobservedTaskException(object sender, System.Threading.Tasks.UnobservedTaskExceptionEventArgs e)
-        {
-            HandleException("Task异常", e.Exception);
-            e.SetObserved(); // 标记为已观察，防止应用崩溃
-        }
-        
-        /// <summary>
-        /// 统一异常处理
-        /// </summary>
-        private void HandleException(string source, Exception ex)
-        {
-            if (ex == null) return;
-            
             try
             {
-                // 记录异常到日志
-                string logDir = Path.Combine(AppDataDirectory, "Logs");
-                Directory.CreateDirectory(logDir);
-                
-                string logFile = Path.Combine(logDir, $"error_{DateTime.Now:yyyyMMdd}.log");
-                string errorMessage = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {source}: {ex.Message}\r\n{ex.StackTrace}\r\n\r\n";
-                
-                File.AppendAllText(logFile, errorMessage);
-                
-                // 在Debug模式显示错误消息框
-                #if DEBUG
-                MessageBox.Show($"{source}:\n{ex.Message}\n\n{ex.StackTrace}", "错误", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                #endif
+                int retryCount = 0;
+                while (retryCount < 3)
+                {
+                    if (SystemParametersInfo(
+                        SPI_SETDESKWALLPAPER,
+                        0,
+                        null,
+                        SPIF_UPDATEINIFILE | SPIF_SENDCHANGE) != 0)
+                    {
+                        Debug.WriteLine("壁纸恢复成功");
+                        break;
+                    }
+                    retryCount++;
+                    Thread.Sleep(500);
+                }
+
+                if (retryCount >= 3)
+                {
+                    Debug.WriteLine("壁纸恢复失败");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                // 如果异常处理本身出错，确保不会循环
+                Debug.WriteLine($"壁纸恢复失败: {ex.Message}");
             }
         }
-        
-        #endregion
+
+        // 将此方法也标记为 static（仅访问静态字段/方法）
+        private static void ReleaseResources()
+        {
+            lock (_mutexLock)
+            {
+                try
+                {
+                    if (_mutex != null && _mutexAcquired)
+                    {
+                        if (_mutex.WaitOne(0))
+                        {
+                            _mutex.ReleaseMutex();
+                        }
+                        _mutex.Dispose();
+                        _mutex = null;
+                        _mutexAcquired = false;
+                        Debug.WriteLine("Mutex已释放");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"释放Mutex失败: {ex.Message}");
+                }
+            }
+
+            TerminateBackgroundThreads();
+        }
+
+        // 已标记为 static
+        private static void TerminateBackgroundThreads()
+        {
+            try
+            {
+                var threads = Process.GetCurrentProcess().Threads;
+                foreach (ProcessThread thread in threads)
+                {
+                    try
+                    {
+                        if (thread.Id != Environment.CurrentManagedThreadId)
+                        {
+                            Debug.WriteLine($"终止线程: {thread.Id}");
+                            thread.Dispose();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"终止线程失败: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"检查线程失败: {ex.Message}");
+            }
+        }
     }
 }
