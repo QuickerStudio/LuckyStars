@@ -1,11 +1,13 @@
 # LukyStars
 
- # WPF&.NET8.C# LukyStars wallpaper  ver 0.6
+ # WPF&.NET8.C# LukyStars wallpaper  ver 1
 
                     # Infrastructure Biuld by Github Copilot Pro   
                     # Explore Wallpaper Layering build by Cline
                     # The instructor is DeepSeek
-       
+  Interaction by Design Claude 3.7 Sonnet Thinking
+  Interaction prototype and implementation by GPT o1
+   
     After 19 hours of hard work, Cline completed all the exploration 
     of wallpaper layering on her own, and his friends helped out!
     Always remember March 9, 2025 at 1 a.m., an unforgettable moment, 
