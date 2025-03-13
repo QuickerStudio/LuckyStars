@@ -456,12 +456,39 @@ namespace LuckyStars
             if (!_isWebViewInitialized || webView.CoreWebView2 == null) return;
 
             string html = @"<!DOCTYPE html>
-<html lang=""en"">
+<html lang=""zh"">
 <head>
     <meta charset=""UTF-8"">
-    <meta name=""viewport"" content=""width=device-width, initial-scale=1.0"">
-    <title>LuckyStars</title>
+    <title>LuckyStars - 互动壁纸</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: transparent;
+            width: 100vw;
+            height: 100vh;
+        }
+        #debug {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 5px;
+            font-family: monospace;
+            z-index: 1000;
+        }
+        #cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; /* 确保元素不会捕获鼠标事件 */
+            z-index: 999;
+        }
         /* 画布样式设置 */
         canvas {
             position: fixed;  // 固定定位
@@ -472,9 +499,37 @@ namespace LuckyStars
     </style>
 </head>
 <body>
+    <!-- 调试信息显示区 -->
+    <div id=""debug"">鼠标位置: X=0, Y=0</div>
+    
+    <!-- 可视化鼠标指示器 -->
+    <div id=""cursor""></div>
+
     <canvas id=""particleCanvas""></canvas>
 
     <script>
+        // 调试元素
+        const debugElement = document.getElementById('debug');
+        const cursorElement = document.getElementById('cursor');
+        
+        // 接收从C#发送的鼠标坐标的函数
+        function updateMousePosition(x, y) {
+            // 更新调试显示
+            debugElement.textContent = `鼠标位置: X=${x}, Y=${y}`;
+            
+            // 移动视觉指示器
+            cursorElement.style.left = x + 'px';
+            cursorElement.style.top = y + 'px';
+            
+            // 在这里添加您的互动动画代码
+            // 例如: 让元素跟随鼠标、触发特效等
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('互动壁纸已加载，等待鼠标坐标...');
+        });
+
         // 参数变量集中管理
         const config = {
             particleSize: { min: 1, max: 4 }, // 粒子尺寸范围
