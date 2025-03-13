@@ -1,0 +1,134 @@
+APP.CS是程序API的集中地，大部分功能都在这里实现，方便后期移植。
+mainwindow.cs 只包含了播放壁纸和内部组件的的相关代码，还有窗口显示管理。
+TrayIconHostWindow.cs是APP.CS和mainwindow.cs之间通信的桥梁，TrayIconHostWindow.cs调用APP.CS的API对mainwindow.cs的行为进行管理
+
+
+这是一个WPF .NET8的壁纸应用程序，运行在windows10. 现在需要添加图片轮播功能，默认壁纸路径是："LuckyStars\Resource\LuckyStarsWallpaper"
+用户储存路径是："C:\Users\Quick\OneDrive\Pictures\LuckyStarsWallpaper"
+功能逻辑：首次启动读取默认路径，判断用户路径是否为空，不为空则读取用户路径内的壁纸并使用image播放。每5分钟更换一次壁纸。
+
+
+
+根据当前代码和需求，我需要确认以下信息来制定完整的修复计划：
+
+**系统托盘图标资源
+确认app.ico文件路径是正确的：C:\Users\Quick\Desktop\LuckyStars\Resource\UI
+1、不需要创建新的图标资源
+2、壁纸恢复机制：鼠标左键切换 WebView 显隐，目标不是mainwindow.xaml，是WebView 显隐
+3、当前是否有保存原始壁纸设置：这是基于webview的互动壁纸，完成度很高了，也不用修改之前的app.CS关于WorkerW的窗口分层逻辑，因为这是一个壁纸软件。webview只是有个bug，目前无法与鼠标建立通信完成与html粒子动画的互动。
+4、需要恢复的默认壁纸路径：初始路径是没有，webview是内嵌于程序内部的交互式html动画。
+**线程管理**
+5、当前有哪些后台线程需要管理，后台创建的一大堆webview和程序的主进程。我不太懂，我只知道webview在程序启动时会出现初始化失败的提示，可能哪里又线程阻塞，在Mainwindows检查
+6、线程关闭的优先级顺序我觉得先。先关闭主窗口进程再关闭后台一大堆的webview渲染进程，然后再关闭notifyicon
+
+**单实例控制
+7、应用程序的唯一标识名称，这是测试版我没创建也不知道。
+8、重复启动时的提示信息，没有提示信息
+9、请提供以上信息，我将制定详细的修复方案，包括：
+
+10NotifyIcon实现细节：创建一个叫Center.xaml和Center.xaml.cs,然后在app.cs里注册线程管理，建立独立的notifyicon，Center.cs用于管理右键菜单和管理主窗口mainwindow的播放行为，Center.xaml用于创建单独的菜单窗口来控制mainwindow。Center调用app.cs里的api进行管理。
+11、壁纸恢复API集成，所有API集成到app.cs里，各个组件互相独立
+12、Mutex单实例控制，，修复 WebView2 线程残留修复 WebView2 线程残留问题！程序退出时显式关闭 WebView2 环境（调用 ShutdownAsync 和 Dispose），并强制终止所有 msedgewebview2 进程（用 Process.Kill）。确保主程序退出后桌面壁纸还原，无残留线程。
+13、线程管理机制：这个程序只有webview的线程问题，没有其他明显问题：后台残留，启动阻塞，DPI对不齐，没采用异步加载，重复创建大量线程导致处理器占用高。
+14、资源释放顺序，先主窗口，然后后台webview的一大堆渲染进程，
+然后center等app.cs回收完所有资源最后退出。
+当您确认这些细节后，开始修复：但是由于任务过多，采取分步执行，这个计划已经保存，优先执行第一个任务点。
+### **独立 `NotifyIcon` 开发计划（简短版）**
+
+---
+
+### **一、核心功能**
+1. **左键点击**：显示/隐藏 `WebView` 窗口。  
+2. **右键点击**：弹出菜单，含“退出”选项。  
+3. **独立生命周期**：`NotifyIcon` 不依赖主窗口，程序退出时释放资源。
+4.修复显隐逻辑，只绑定webview的显示/隐藏
+-
+---
+
+### **三、关键点**
+1. **图标资源**：确保 `app.ico` 存在且路径正确。
+2. **资源释放**：退出时调用 `_notifyIcon.Dispose()`。
+3. **事件绑定**：左键切换显隐，右键弹出菜单。
+
+---
+
+### **四、扩展预留**
+- **动态菜单**：运行时添加菜单项。
+- **动画效果**：右键菜单滑动动画。
+- **多语言支持**：从资源文件加载菜单文本。
+
+---
+
+### **五、测试**
+1. 左键点击切换 `WebView` 显隐。
+2. 右键点击弹出菜单并退出。
+3. 确保无资源泄漏。
+
+---
+
+按此计划开发，基础功能完成后可逐步扩展。
+
+### **工作重点：**
+
+### **修复提示词：**
+**“Cline，修复程序退出后桌面壁纸变黑的问题！左键切换 WebView 显隐，
+右键菜单退出，退出时检查所有线程，确保还原系统默认壁纸。
+在app.xaml.cs中程序不允许反复启动，修复多进程创建的问题！”**
+
+---
+
+### **修复关键点：**
+1. **还原壁纸**：  
+   使用 `SystemParametersInfo` API 在退出时恢复默认壁纸。  
+   ```csharp
+   [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+   private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+
+   private const int SPI_SETDESKWALLPAPER = 0x0014;
+   private const int SPIF_UPDATEINIFILE = 0x01;
+   private const int SPIF_SENDCHANGE = 0x02;
+
+   public static void RestoreDefaultWallpaper()
+   {
+       SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, null, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
+   }
+   ```
+
+2. **禁止多进程**：  
+   使用 `Mutex` 确保程序只能启动一个实例。  
+   ```csharp
+   private static Mutex _mutex;
+
+   protected override void OnStartup(StartupEventArgs e)
+   {
+       bool createdNew;
+       _mutex = new Mutex(true, "YourAppName", out createdNew);
+
+       if (!createdNew)
+       {
+           MessageBox.Show("程序已运行！");
+           Shutdown();
+           return;
+       }
+
+       base.OnStartup(e);
+   }
+   ```
+
+3. **线程检查**：  
+   退出时确保所有线程（如壁纸渲染线程）都正确关闭。  
+   ```csharp
+   foreach (var thread in _backgroundThreads)
+   {
+       thread.Abort(); // 或者更优雅的方式关闭
+   }
+   ```
+
+---
+
+### **传话给 Cline：**
+**“Cline，修复壁纸变黑问题，禁止多进程启动，退出时还原壁纸并检查线程！左键切换 WebView 显隐，右键滑动菜单退出。搞定后咱们再扩展！”**
+
+---
+
+这下够清楚了吧？如果 Cline 还有啥不明白的，随时告诉我，我帮你继续传话！😎
