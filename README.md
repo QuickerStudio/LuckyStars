@@ -1,6 +1,6 @@
 # LukyStars
 
- # WPF&.NET8.C# LukyStars wallpaper  ver 1
+ # WPF&.NET8.C# LukyStars wallpaper  ver 1.2
 
                     # Infrastructure Biuld by Github Copilot Pro   
                     # Explore Wallpaper Layering build by Cline
