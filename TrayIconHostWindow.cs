@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace LuckyStars
 {
@@ -372,18 +373,60 @@ namespace LuckyStars
 
         private void OnFileDropped(string[] files)
         {
+            var supportedExtensions = new[]{
+    ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff",  // 图片
+    ".mp4", ".mov", ".avi", ".mkv", ".webm",           // 视频
+    ".html", ".htm"                                    // HTML
+        };
+            var targetFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+                "LuckyStarsWallpaper");
+
+            int successCount = 0;
+            int failCount = 0;
+
             foreach (string file in files)
             {
-                string extension = System.IO.Path.GetExtension(file).ToLowerInvariant();
-                // 处理文件逻辑
+                try
+                {
+                    string extension = Path.GetExtension(file).ToLowerInvariant();
+
+                    // 检查文件类型是否支持
+                    if (!supportedExtensions.Contains(extension))
+                    {
+                        failCount++;
+                        continue;
+                    }
+
+                    // 确保目标文件夹存在
+                    if (!Directory.Exists(targetFolder))
+                    {
+                        Directory.CreateDirectory(targetFolder);
+                    }
+
+                    // 复制文件到目标文件夹
+                    string fileName = Path.GetFileName(file);
+                    string destFile = Path.Combine(targetFolder, fileName);
+                    File.Copy(file, destFile, true);
+                    successCount++;
+                }
+                catch (Exception ex)
+                {
+                    failCount++;
+
+                }
             }
 
             // 显示通知
+            string message = successCount > 0
+                ? $"成功接收 {successCount} 个文件" + (failCount > 0 ? $"，失败 {failCount} 个" : "")
+                : "没有成功接收任何文件";
+
             _notifyIcon?.ShowBalloonTip(
                 3000, // 显示时间（毫秒）
-                "收到文件",
-                $"成功接收 {files.Length} 个文件",
-                ToolTipIcon.Info); // 添加所需的 tipIcon 参数
+                "文件处理结果",
+                message,
+                successCount > 0 ? ToolTipIcon.Info : ToolTipIcon.Error);
         }
 
         private void ExitApplication()
