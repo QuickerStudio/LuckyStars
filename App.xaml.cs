@@ -1,10 +1,8 @@
 #nullable enable
 
 using Microsoft.Win32;
-using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 
@@ -12,6 +10,8 @@ namespace LuckyStars
 {
     public partial class App : Application
     {
+        private TrayManager? _trayManager;
+        private MainWindow? _mainWindow;
         // 窗口样式常量
         private const int GWL_STYLE = -16;
         private const int GWL_EXSTYLE = -20;
@@ -92,6 +92,8 @@ namespace LuckyStars
 
         protected override void OnStartup(StartupEventArgs e)
         {
+          
+          
             try
             {
                 lock (_mutexLock)
@@ -109,6 +111,7 @@ namespace LuckyStars
 
                 base.OnStartup(e);
 
+
                 // 获取桌面父窗口句柄
                 _desktopHandle = GetDesktopParentHandle();
                 if (_desktopHandle == IntPtr.Zero)
@@ -117,6 +120,9 @@ namespace LuckyStars
                 }
 
                 mainWindow = new MainWindow();
+
+                // 创建托盘管理器,这里是第二个通知图标，看情况是否保留。
+                _trayManager = new TrayManager(mainWindow);
 
                 mainWindow.SourceInitialized += (s, e2) =>
                 {
@@ -153,9 +159,8 @@ namespace LuckyStars
 
                 mainWindow.Show();
 
-                // 托盘程序窗口
-                var trayHost = new TrayIconHostWindow(mainWindow, new System.Windows.Forms.Timer());
-                trayHost.Show();
+                // 确保 _trayManager 已经完成初始化并显示
+                _trayManager?.Show();
 
                 // 注册窗口重置事件
                 SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;

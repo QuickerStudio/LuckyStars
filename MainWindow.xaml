@@ -16,6 +16,7 @@
         <WindowChrome GlassFrameThickness="-1" />
     </WindowChrome.WindowChrome>
     <Grid>
+        <MediaElement x:Name="mediaPlayer" LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Fill" Visibility="Collapsed"/>
         <wv2:WebView2 x:Name="webView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Timers;
@@ -9,18 +10,17 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+
 namespace LuckyStars
 {
-    /// <summary>
-    /// 壁纸主窗口，包含鼠标跨层通信与 WebView2 初始化等逻辑
-    /// </summary>
     public partial class MainWindow : Window
     {
-        // 原有字段...
         private System.Timers.Timer? timer;
         private FileSystemWatcher? folderWatcher;
         private System.Timers.Timer? idleTimer;
         private readonly List<string> imagePaths = new();
+        private readonly List<string> videoPaths = new();
+        private readonly List<string> audioPaths = new();
         private bool _isWebViewInitialized = false;
         private int currentIndex;
         private readonly string targetFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "LuckyStarsWallpaper");
@@ -57,10 +57,10 @@ namespace LuckyStars
             EnsureDirectoryExists(targetFolder);
             SetupFolderWatcher();
             InitializeIdleTimer();
-            LoadImagePaths();
+            LoadMediaPaths();
             int timerInterval = LoadTimerIntervalFromRegistry();
             SetupTimer(timerInterval);
-            ShowImage();
+            ShowMedia();
             InitializeWebView();
 
             // 此时 OnSourceInitialized 中会进一步获取窗口句柄并初始化钩子/定时器
@@ -197,7 +197,7 @@ namespace LuckyStars
             {
                 Dispatcher.Invoke(() =>
                 {
-                    LoadImagePaths();
+                    LoadMediaPaths();
                     pendingRefresh = false;
                 });
             }
@@ -228,7 +228,7 @@ namespace LuckyStars
         private void OnFolderChanged(object sender, FileSystemEventArgs e)
         {
             string extension = Path.GetExtension(e.FullPath).ToLowerInvariant();
-            string[] supportedExtensions = new[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff" };
+            string[] supportedExtensions = new[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".mp4", ".avi", ".mkv", ".mp3", ".wav" };
             if (supportedExtensions.Contains(extension))
             {
                 ResetIdleTimer();
@@ -238,14 +238,14 @@ namespace LuckyStars
         private void OnFolderRenamed(object sender, RenamedEventArgs e)
         {
             string extension = Path.GetExtension(e.FullPath).ToLowerInvariant();
-            string[] supportedExtensions = new[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff" };
+            string[] supportedExtensions = new[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".mp4", ".avi", ".mkv", ".mp3", ".wav" };
             if (supportedExtensions.Contains(extension))
             {
                 ResetIdleTimer();
             }
         }
 
-        private void LoadImagePaths()
+        private void LoadMediaPaths()
         {
             try
             {
@@ -254,8 +254,13 @@ namespace LuckyStars
                     Directory.CreateDirectory(targetFolder);
                 }
                 imagePaths.Clear();
-                var extensions = new[] { "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif", "*.tiff" };
-                foreach (var ext in extensions)
+                videoPaths.Clear();
+                audioPaths.Clear();
+                var imageExtensions = new[] { "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif", "*.tiff" };
+                var videoExtensions = new[] { "*.mp4", "*.avi", "*.mkv" };
+                var audioExtensions = new[] { "*.mp3", "*.wav" };
+
+                foreach (var ext in imageExtensions)
                 {
                     var files = Directory.GetFiles(targetFolder, ext);
                     foreach (var file in files)
@@ -279,27 +284,76 @@ namespace LuckyStars
                         catch (Exception) { }
                     }
                 }
+
+                foreach (var ext in videoExtensions)
+                {
+                    var files = Directory.GetFiles(targetFolder, ext);
+                    videoPaths.AddRange(files);
+                }
+
+                foreach (var ext in audioExtensions)
+                {
+                    var files = Directory.GetFiles(targetFolder, ext);
+                    audioPaths.AddRange(files);
+                }
+
                 var sortedImagePaths = imagePaths.OrderBy(path => path).ToList();
+                var sortedVideoPaths = videoPaths.OrderBy(path => path).ToList();
+                var sortedAudioPaths = audioPaths.OrderBy(path => path).ToList();
+
                 imagePaths.Clear();
+                videoPaths.Clear();
+                audioPaths.Clear();
+
                 imagePaths.AddRange(sortedImagePaths);
+                videoPaths.AddRange(sortedVideoPaths);
+                audioPaths.AddRange(sortedAudioPaths);
             }
             catch (Exception) { }
         }
 
         private void OnTimedEvent(object? source, ElapsedEventArgs e)
         {
-            Dispatcher.Invoke(ShowImage);
+            Dispatcher.Invoke(ShowMedia);
         }
 
-        private void ShowImage()
+        public void ShowMedia()
         {
-            if (imagePaths.Count == 0)
+            if (imagePaths.Count == 0 && videoPaths.Count == 0 && audioPaths.Count == 0)
+            {
+                return;
+            }
+
+            if (currentIndex < imagePaths.Count)
+            {
+                ShowImage(imagePaths[currentIndex]);
+                MuteVideoPlayer(); // Mute video player when showing images
+            }
+            else if (currentIndex < imagePaths.Count + videoPaths.Count)
+            {
+                ShowVideo();
+                UnmuteVideoPlayer(); // Unmute and set volume when showing videos
+            }
+            else
+            {
+                PlayAudio();
+            }
+
+            currentIndex = (currentIndex + 1) % (imagePaths.Count + videoPaths.Count + audioPaths.Count);
+        }
+
+        private void ShowImage(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath))
             {
                 return;
             }
             try
             {
-                var imageUri = new Uri(imagePaths[currentIndex], UriKind.Absolute);
+                mediaPlayer.Stop();
+                mediaPlayer.Visibility = Visibility.Collapsed;
+
+                var imageUri = new Uri(imagePath, UriKind.Absolute);
                 var image = new BitmapImage();
                 image.BeginInit();
                 image.UriSource = imageUri;
@@ -315,26 +369,80 @@ namespace LuckyStars
                     BackgroundImageBrush.BeginAnimation(OpacityProperty, fadeIn);
                 };
                 BackgroundImageBrush.BeginAnimation(OpacityProperty, fadeOut);
-                currentIndex = (currentIndex + 1) % imagePaths.Count;
             }
             catch (Exception)
             {
                 if (imagePaths.Count > 1)
                 {
                     currentIndex = (currentIndex + 1) % imagePaths.Count;
-                    ShowImage();
+                    ShowImage(imagePaths[currentIndex]);
                 }
             }
         }
 
-        public void RefreshImageList()
+        private void ShowVideo()
         {
-            LoadImagePaths();
+            if (videoPaths.Count == 0)
+            {
+                return;
+            }
+            try
+            {
+                BackgroundImageBrush.ImageSource = null;
+                mediaPlayer.Visibility = Visibility.Visible;
+
+                var videoUri = new Uri(videoPaths[currentIndex - imagePaths.Count], UriKind.Absolute);
+                string extension = Path.GetExtension(videoUri.LocalPath).ToLowerInvariant();
+                string[] supportedVideoExtensions = new[] { ".mp4", ".avi", ".mkv" };
+
+                if (!supportedVideoExtensions.Contains(extension))
+                {
+                    throw new InvalidOperationException("Unsupported video format.");
+                }
+
+                mediaPlayer.Source = videoUri;
+                mediaPlayer.MediaEnded -= OnMediaEnded;
+                mediaPlayer.MediaEnded += OnMediaEnded;
+                mediaPlayer.Play();
+            }
+            catch (Exception)
+            {
+                if (videoPaths.Count > 1)
+                {
+                    currentIndex = (currentIndex - imagePaths.Count + 1) % videoPaths.Count + imagePaths.Count;
+                    ShowVideo();
+                }
+            }
         }
 
-        public void NextImage()
+        private void OnMediaEnded(object sender, RoutedEventArgs e)
         {
-            ShowImage();
+            mediaPlayer.Position = TimeSpan.Zero;
+            mediaPlayer.Play();
+        }
+
+        private void PlayAudio()
+        {
+            if (audioPaths.Count == 0)
+            {
+                return;
+            }
+            try
+            {
+                mediaPlayer.Visibility = Visibility.Collapsed;
+
+                var audioUri = new Uri(audioPaths[currentIndex - imagePaths.Count - videoPaths.Count], UriKind.Absolute);
+                mediaPlayer.Source = audioUri;
+                mediaPlayer.Play();
+            }
+            catch (Exception)
+            {
+                if (audioPaths.Count > 1)
+                {
+                    currentIndex = (currentIndex - imagePaths.Count - videoPaths.Count + 1) % audioPaths.Count + imagePaths.Count + videoPaths.Count;
+                    PlayAudio();
+                }
+            }
         }
 
         protected override void OnClosed(EventArgs e)
@@ -419,6 +527,7 @@ namespace LuckyStars
                     System.Diagnostics.Debug.WriteLine($"[WebView2 控制台] {e.Source}: {e.TryGetWebMessageAsString}");
                 };
 
+                // 加载测试 HTML
                 LoadTestHtml();
                 ApplyDpiScale();
                 ApplyFullScreenToWebView();
@@ -431,15 +540,11 @@ namespace LuckyStars
             }
         }
 
-        /// <summary>
-        /// 加载测试 HTML，并包含接收鼠标坐标的 JS 逻辑
-        /// </summary>
         public void LoadTestHtml()
         {
             if (!_isWebViewInitialized || webView.CoreWebView2 == null) return;
-            // 新增HTML，提供updateMousePosition函数
-            string html = @"
-<!DOCTYPE html>
+            // 这里省略 HTML 加载代码
+            string html = @"<!DOCTYPE html>
 <html lang=""zh"">
 <head>
     <meta charset=""UTF-8"">
@@ -872,7 +977,11 @@ namespace LuckyStars
         animate();
     </script>
 </body>
-</html>";
+</html>
+
+
+
+";
             try
             {
                 webView.CoreWebView2.NavigateToString(html);
@@ -1021,7 +1130,59 @@ namespace LuckyStars
             return IntPtr.Zero;
         }
 
+        internal void NextImage()
+        {
+            if (imagePaths.Count == 0)
+                return;
+
+            // Increment the current index
+            currentIndex++;
+
+            // Wrap around if the index exceeds the number of images
+            if (currentIndex >= imagePaths.Count)
+                currentIndex = 0;
+
+            // Load and display the image at the current index
+            string nextImagePath = imagePaths[currentIndex];
+            ShowImage(nextImagePath);
+        }
+
         #endregion
+
+        // Add methods to control media player
+        public void MuteVideoPlayer()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                mediaPlayer.IsMuted = true;
+            });
+        }
+
+        public void UnmuteVideoPlayer()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                mediaPlayer.IsMuted = false;
+                mediaPlayer.Volume = 0.2; // Set volume to 20%
+            });
+        }
+
+        // Add a method to play the next video
+        public void NextVideo()
+        {
+            if (videoPaths.Count == 0)
+                return;
+
+            // Increment the current index to point to the next video
+            currentIndex++;
+
+            // Wrap around if the index exceeds the number of videos
+            if (currentIndex >= imagePaths.Count + videoPaths.Count)
+                currentIndex = imagePaths.Count;
+
+            // Play the video at the current index
+            ShowVideo();
+        }
     }
 
     // In the MouseCoordSender class, explicitly qualify Timer:

@@ -19,13 +19,17 @@ namespace LuckyStars
             this.AllowsTransparency = true;
             this.Topmost = true;
 
-            // 调试时使用半透明蓝色背景，便于观察位置
-            this.Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 255));
             // 设置半透明背景以便于调试
-          //  this.Background = new SolidColorBrush(Color.FromArgb(1, 255, 0, 0));
+            this.Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 255));
+
             // 添加边框便于观察
             this.BorderBrush = new SolidColorBrush(Colors.Red);
             this.BorderThickness = new Thickness(1);
+
+            // 注册事件
+            this.DragEnter += OnDragEnter;
+            this.DragOver += OnDragOver;
+            this.Drop += OnDrop;
 
             // 添加调试信息标签
             var debugLabel = new TextBlock
@@ -36,16 +40,6 @@ namespace LuckyStars
                 VerticalAlignment = VerticalAlignment.Center
             };
             this.Content = debugLabel;
-            // 注册事件
-            this.DragEnter += OnDragEnter;
-            this.DragOver += OnDragOver;
-            this.Drop += OnDrop;
-
-            // 调试信息
-            this.MouseEnter += (s, e) => Console.WriteLine("鼠标进入拖放窗口");
-            this.MouseLeave += (s, e) => Console.WriteLine("鼠标离开拖放窗口");
-
-
         }
 
         private void OnDragEnter(object sender, DragEventArgs e)
