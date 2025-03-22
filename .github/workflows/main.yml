@@ -1,0 +1,23 @@
+
+name: Enable Alias in GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-alias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup alias and enable expansion
+        run: |
+          echo "alias ll='ls -lah'" >> ~/.bashrc
+          echo "shopt -s expand_aliases" >> ~/.bashrc
+          source ~/.bashrc
+          bash -i -c 'll'  # 运行交互式 shell 测试别名
+        shell: bash
