@@ -40,9 +40,7 @@ move forward for your dream!
 [📥 LuckyStars Release](https://github.com/QuickerStudio/LukyStars/releases/tag/LuckyStars)
 
 **Tutorial Video:**  
-[🎥 Release and tutorial]
-https://youtu.be/N-5-s4A2lBo
-
+[🎥 Release and tutorial](https://youtu.be/N-5-s4A2lBo)
 ---
 
 ## Tags
