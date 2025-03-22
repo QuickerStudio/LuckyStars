@@ -23,5 +23,8 @@ Thank you, hard-working people,
 move forward for your dream!
 
 # wallpaper #dream #I love you💕 
-🎉Discover me here：https://github.com/QuickerStudio/LukyStars/releases/tag/LuckyStars
-How to use it watch here:https://youtu.be/N-5-s4A2lBo?si=su2fs4dEDNm9wa9s
+#🎉Discover me here：
+* https://github.com/QuickerStudio/LukyStars/releases/tag/LuckyStars
+
+# 💕How to use it watch here:
+* https://youtu.be/N-5-s4A2lBo?si=su2fs4dEDNm9wa9s
