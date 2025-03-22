@@ -34,16 +34,13 @@ move forward for your dream!
 
 ---
 
-## Discover LuckyStars ✨
+**Discover LuckyStars ✨**
+
 **Find it here:**  
 [📥 LuckyStars Release](https://github.com/QuickerStudio/LukyStars/releases/tag/LuckyStars)
 
 **Tutorial Video:**  
-[🎥 Release and  tutorial](https://youtu.be/N-5-s4A2lBo?si=su2fs4dEDNm9wa9s)
-```markdown
-[![视频标题](https://img.youtube.com/vi/N-5-s4A2lBo/0.jpg)](https://youtu.be/N-5-s4A2lBo?si=su2fs4dEDNm9wa9s)
-```
----
+[🎥 Release and tutorial](https://youtu.be/N-5-s4A2lBo)
 ---
 
 ## Tags
