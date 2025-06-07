@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "jbzky/3y4W4=",
+  "success": true,
+  "projectFilePath": "D:\\Github\\LukyStars\\LuckyStars.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.web.webview2\\1.0.3124.44\\microsoft.web.webview2.1.0.3124.44.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.3\\microsoft.win32.systemevents.9.0.3.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.windows.cswin32\\0.3.106\\microsoft.windows.cswin32.0.3.106.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.windows.sdk.win32docs\\0.1.42-alpha\\microsoft.windows.sdk.win32docs.0.1.42-alpha.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\60.0.34-preview\\microsoft.windows.sdk.win32metadata.60.0.34-preview.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.windows.wdk.win32metadata\\0.11.4-experimental\\microsoft.windows.wdk.win32metadata.0.11.4-experimental.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio\\2.2.1\\naudio.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.asio\\2.2.1\\naudio.asio.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.core\\2.2.1\\naudio.core.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.midi\\2.2.1\\naudio.midi.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.wasapi\\2.2.1\\naudio.wasapi.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.winforms\\2.2.1\\naudio.winforms.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\naudio.winmm\\2.2.1\\naudio.winmm.2.2.1.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\system.drawing.common\\9.0.3\\system.drawing.common.9.0.3.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\webview2.runtime.x64\\134.0.3124.72\\webview2.runtime.x64.134.0.3124.72.nupkg.sha512",
+    "C:\\Users\\Quick\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.57\\microsoft.windows.sdk.net.ref.10.0.17763.57.nupkg.sha512"
+  ],
+  "logs": []
+}

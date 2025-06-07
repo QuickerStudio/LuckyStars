@@ -1,4 +1,3 @@
-
 name: Enable Alias in GitHub Actions
 
 on:
@@ -16,8 +15,6 @@ jobs:
 
       - name: Setup alias and enable expansion
         run: |
-          echo "alias ll='ls -lah'" >> ~/.bashrc
-          echo "shopt -s expand_aliases" >> ~/.bashrc
-          source ~/.bashrc
-          bash -i -c 'll'  # 运行交互式 shell 测试别名
+          alias ll='ls -lah'
+          ll  # 直接定义并使用别名
         shell: bash

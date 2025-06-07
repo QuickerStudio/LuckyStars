@@ -1,0 +1,591 @@
+using System;
+using System.Drawing;
+using System.IO;
+using System.Media; // 添加系统提示音
+using System.Reflection;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Threading;
+using Control = System.Windows.Forms.Control;
+using DataFormats = System.Windows.DataFormats;
+using DragDropEffects = System.Windows.DragDropEffects;
+using DragEventArgs = System.Windows.DragEventArgs;
+using Point = System.Windows.Point;
+
+using LuckyStars.UI;
+using LuckyStars.Utils;
+
+namespace LuckyStars.Managers
+{
+    /// <summary>
+    /// 托盘管理器，负责管理系统托盘图标和相关功能
+    /// </summary>
+    public class TrayManager : IDisposable
+    {
+        private readonly NotifyIcon _notifyIcon;
+        private readonly MainWindow _mainWindow;
+        private TrayDropWindow? _dropWindow;
+        private DetectionZoneWindow? _detectionZoneWindow;
+        private bool _isWebViewActive = true;
+        private bool _needReloadContent = false;
+        private bool _isWaitingForSecondClick = false;
+        private System.Windows.Forms.Timer? _clickTimer;
+        private const int DoubleClickTime = 300;
+        private MouseButtons _lastMouseButton = MouseButtons.None;
+
+        private DateTime _lastClickTime;
+        private Point _lastClickPos;
+        private bool _isClickHandling;
+        private const double DoubleClickTimeThreshold = 500; // 双击时间阈值（毫秒）
+        private const double ClickThreshold = 5; // 点击判定阈值
+
+        private Rect _monitoringArea;
+        private const double DETECTION_ZONE_HEIGHT = 10;     // 检测区高度
+        private const double DETECTION_ZONE_OFFSET = 5;     // 检测区与托盘区的距离
+        private bool _isDraggingFromOutside = false;         // 标记是否从外部拖拽
+
+        private readonly FileTransferManager _fileTransferManager;
+
+        /// <summary>
+        /// 初始化托盘管理器
+        /// </summary>
+        /// <param name="mainWindow">主窗口实例</param>
+        public TrayManager(MainWindow mainWindow)
+        {
+            _mainWindow = mainWindow;
+
+            // 初始化文件传输管理器
+            _fileTransferManager = new FileTransferManager(mainWindow);
+
+            // 初始化 NotifyIcon
+            _notifyIcon = new NotifyIcon
+            {
+                Icon = GetEmbeddedIcon("LuckyStars.Resource.UI.app.ico"),
+                Visible = true,
+                Text = "A little lucky star, lighting up a piece of the night sky for you!"
+            };
+
+            // 初始化计时器
+            _clickTimer = new System.Windows.Forms.Timer
+            {
+                Interval = DoubleClickTime
+            };
+            _clickTimer.Tick += OnClickTimerElapsed;
+
+            // 设置鼠标事件处理
+            _notifyIcon.MouseDown += (sender, e) =>
+            {
+                if ((Control.MouseButtons & MouseButtons.Left) != 0 &&
+                    (Control.MouseButtons & MouseButtons.Right) != 0)
+                {
+                    ExitApplication();
+                    return;
+                }
+
+                _lastMouseButton = e.Button;
+
+                if (_isWaitingForSecondClick)
+                {
+                    _clickTimer.Stop();
+                    _isWaitingForSecondClick = false;
+
+                    // 执行双击操作
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        // 左键双击：切换音乐播放状态并隐藏/显示WebView
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            _mainWindow.Webview2_playmusic(); // 切换音乐播放状态
+                            ToggleWebView(); // 保留原有的隐藏/显示WebView功能
+                        });
+                    }
+                    else if (e.Button == MouseButtons.Right)
+                    {
+                        // 右键双击：切换显示时长
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            ToggleDisplayDuration();
+                        });
+                    }
+                }
+                else
+                {
+                    _isWaitingForSecondClick = true;
+                    _clickTimer.Start();
+                }
+            };
+
+            InitializeDropWindow();
+            InitializeMonitor();
+            UpdateDropWindowPosition(); // 启动时更新透明窗口位置
+        }
+
+        /// <summary>
+        /// 从嵌入资源中获取图标
+        /// </summary>
+        /// <param name="resourceName">资源名称</param>
+        /// <returns>图标</returns>
+        private static Icon GetEmbeddedIcon(string resourceName)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                    throw new ArgumentException("Resource not found: " + resourceName);
+
+                return new Icon(stream);
+            }
+        }
+
+        /// <summary>
+        /// 计时器回调函数，处理单击事件
+        /// </summary>
+        private void OnClickTimerElapsed(object? sender, EventArgs e)
+        {
+            _clickTimer?.Stop();
+            _isWaitingForSecondClick = false;
+
+            // 根据最后按下的鼠标按钮执行相应操作
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (_lastMouseButton == MouseButtons.Left)
+                {
+                    // 左键单击：隐藏视频播放器、切换图片、静音视频播放器
+                    _mainWindow.MuteVideoPlayer();
+                    _mainWindow.NextImage();
+                }
+                else if (_lastMouseButton == MouseButtons.Right)
+                {
+                    // 右键单击：显示视频播放器、切换视频、设置音量20%
+                    _mainWindow.UnmuteVideoPlayer();
+                    _mainWindow.NextVideo();
+                }
+            });
+        }
+
+
+
+        /// <summary>
+        /// 获取状态文本
+        /// </summary>
+        private static string GetTimerStateText(RegistryManager.TimerState state)
+        {
+            return state switch
+            {
+                RegistryManager.TimerState.FiveMinutes => "5分钟",
+                RegistryManager.TimerState.TenMinutes => "10分钟",
+                RegistryManager.TimerState.TwentyMinutes => "20分钟",
+                RegistryManager.TimerState.Disabled => "已停用",
+                _ => "未知",
+            };
+        }
+
+        /// <summary>
+        /// 切换 WebView 的显示状态
+        /// </summary>
+        private async void ToggleWebView()
+        {
+            if (_isWebViewActive)
+            {
+                // 隐藏
+                var webView = _mainWindow.GetWebView();
+                if (webView?.CoreWebView2 != null)
+                {
+                    await webView.CoreWebView2.ExecuteScriptAsync(@"
+                        document.body.style.display='none';
+                        document.querySelectorAll('video, audio').forEach(media => media.pause());
+                    ");
+
+                    // 使用 Navigate("about:blank") 清空内容以降低能耗
+                    webView.CoreWebView2.Navigate("about:blank");
+                }
+
+                _needReloadContent = true; // 标记需要重新加载内容
+                _mainWindow.SetWebViewVisibility(false);
+                _isWebViewActive = false;
+            }
+            else
+            {
+                // 恢复
+                _mainWindow.SetWebViewVisibility(true);
+
+                // 始终重新加载内容，因为我们在隐藏时使用了 Navigate("about:blank")
+                var webViewManager = _mainWindow.GetWebViewManager();
+                webViewManager?.LoadTestHtml();
+                _needReloadContent = false;
+
+                _isWebViewActive = true;
+            }
+        }
+
+        /// <summary>
+        /// 切换音频播放状态
+        /// </summary>
+        private async Task ToggleAudio()
+        {
+            // 暂停或播放所有音视频
+            var webView = _mainWindow.GetWebView();
+            if (webView?.CoreWebView2 != null)
+            {
+                await webView.CoreWebView2.ExecuteScriptAsync(@"
+                    (() => {
+                        const mediaElems = document.querySelectorAll('video, audio');
+                        for (const m of mediaElems) {
+                            if (m.paused) {
+                                m.play();
+                            } else {
+                                m.pause();
+                            }
+                        }
+                    })();
+                ");
+            }
+        }
+
+        /// <summary>
+        /// 初始化拖放窗口
+        /// </summary>
+        private void InitializeDropWindow()
+        {
+            _dropWindow = new TrayDropWindow();
+            _dropWindow.Hide(); // 确保窗口在启动时不可见
+            _dropWindow.FileDropped += OnFileDropped;
+
+            // 初始化检测区窗口
+            _detectionZoneWindow = new DetectionZoneWindow();
+            _detectionZoneWindow.Hide(); // 初始时隐藏
+            // 添加拖拽事件处理
+            _detectionZoneWindow.DragEnter += DetectionZoneWindow_DragEnter;
+            _detectionZoneWindow.DragLeave += DetectionZoneWindow_DragLeave;
+            _detectionZoneWindow.FileDropped += OnFileDropped; // 连接文件拖放事件处理器
+        }
+
+        /// <summary>
+        /// 初始化监控区域
+        /// </summary>
+        private void InitializeMonitor()
+        {
+            // 初始化监控区域，只在启动时设置一次
+            UpdateMonitorArea();
+        }
+
+        /// <summary>
+        /// 更新监控区域
+        /// </summary>
+        private void UpdateMonitorArea()
+        {
+            var trayRect = GetTrayIconRect();
+            // 创建一个位于托盘区上方的检测区，确保不覆盖托盘区
+            _monitoringArea = new Rect(
+                trayRect.X - 50,  // 向左扩展50像素
+                trayRect.Y - DETECTION_ZONE_OFFSET - DETECTION_ZONE_HEIGHT,  // 在托盘区上方创建检测区，保持一定距离
+                trayRect.Width + 100,  // 向右扩展100像素
+                DETECTION_ZONE_HEIGHT  // 检测区高度
+            );
+
+            // 更新检测区窗口位置和大小
+            if (_detectionZoneWindow != null)
+            {
+                _detectionZoneWindow.Left = _monitoringArea.X;
+                _detectionZoneWindow.Top = _monitoringArea.Y;
+                _detectionZoneWindow.Width = _monitoringArea.Width;
+                _detectionZoneWindow.Height = _monitoringArea.Height;
+
+                // 确保窗口显示但不获取焦点
+                if (!_detectionZoneWindow.IsVisible)
+                {
+                    _detectionZoneWindow.Show();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 处理拖拽进入检测区事件
+        /// </summary>
+        private void DetectionZoneWindow_DragEnter(object sender, DragEventArgs e)
+        {
+            // 检查是否拖拽的是文件
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // 允许拖放操作
+                e.Effects = DragDropEffects.Copy;
+                _isDraggingFromOutside = true;
+
+                // 更新并显示拖放窗口
+                UpdateDropWindowPosition(); // 拖放前更新一次位置
+                var trayRect = GetTrayIconRect();
+                ShowDropWindow(trayRect);
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// 处理拖拽离开检测区事件
+        /// </summary>
+
+        private System.Windows.Forms.Timer? _autoHideTimer;
+        private const int AutoHideDelay = 5000; // 5秒后自动隐藏
+
+        /// <summary>
+        /// 启动自动隐藏计时器
+        /// </summary>
+        private void StartAutoHideTimer()
+        {
+            // 创建或重置自动隐藏计时器
+            if (_autoHideTimer == null)
+            {
+                _autoHideTimer = new System.Windows.Forms.Timer
+                {
+                    Interval = AutoHideDelay
+                };
+                _autoHideTimer.Tick += AutoHideTimer_Tick;
+            }
+            else
+            {
+                _autoHideTimer.Stop(); // 停止之前的计时器
+            }
+
+            // 启动计时器，5秒后自动隐藏
+            _autoHideTimer.Start();
+        }
+
+        private void DetectionZoneWindow_DragLeave(object sender, DragEventArgs e)
+        {
+            // 拖拽离开检测区但不立即取消拖放窗口
+            e.Handled = true;
+
+            // 重置自动隐藏计时器
+            StartAutoHideTimer();
+        }
+
+        private void AutoHideTimer_Tick(object? sender, EventArgs e)
+        {
+            // 停止计时器
+            _autoHideTimer?.Stop();
+
+            // 在UI线程上隐藏拖放窗口
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                _dropWindow?.Hide();
+                _isDraggingFromOutside = false;
+            });
+        }
+        /// <summary>
+        /// 获取托盘图标区域
+        /// </summary>
+        private Rect GetTrayIconRect()
+        {
+            try
+            {
+                // 找到任务栏
+                IntPtr taskBar = Win32Helper.FindWindow("Shell_TrayWnd", null);
+                if (taskBar != IntPtr.Zero)
+                {
+                    // 找到通知区域
+                    IntPtr trayNotify = Win32Helper.FindWindowEx(taskBar, IntPtr.Zero, "TrayNotifyWnd", null);
+                    if (trayNotify != IntPtr.Zero)
+                    {
+                        // 获取通知区域位置
+                        if (Win32Helper.GetWindowRect(trayNotify, out Win32Helper.RECT trayRect))
+                        {
+                            // 获取屏幕工作区
+                            var workArea = SystemParameters.WorkArea;
+
+                            // 计算托盘图标的预期位置
+                            double iconX = trayRect.Left;
+                            double iconY = trayRect.Top;
+                            double iconWidth = trayRect.Right - trayRect.Left;
+                            double iconHeight = trayRect.Bottom - trayRect.Top;
+
+                            return new Rect(iconX, iconY, iconWidth, iconHeight);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // 如果无法获取准确位置，使用默认位置
+                var screen = SystemParameters.WorkArea;
+                return new Rect(
+                    screen.Right - 200,
+                    screen.Bottom - 40,
+                    32,
+                    32
+                );
+            }
+
+            // 如果无法获取准确位置，使用默认位置
+            var defaultScreen = SystemParameters.WorkArea;
+            return new Rect(
+                defaultScreen.Right - 200,
+                defaultScreen.Bottom - 40,
+                32,
+                32
+            );
+        }
+
+        /// <summary>
+        /// 显示拖放窗口
+        /// </summary>
+        private void ShowDropWindow(Rect trayRect)
+        {
+            if (_dropWindow != null && !_dropWindow.IsVisible)
+            {
+                _dropWindow.Left = trayRect.X;
+                _dropWindow.Top = trayRect.Y;
+                _dropWindow.Width = trayRect.Width;
+                _dropWindow.Height = trayRect.Height;
+
+                _dropWindow.Show();
+                _dropWindow.Activate();
+
+                // 显示窗口时启动自动隐藏计时器
+                StartAutoHideTimer();
+            }
+        }
+
+        /// <summary>
+        /// 更新拖放窗口位置
+        /// </summary>
+        public void UpdateDropWindowPosition()
+        {
+            UpdateMonitorArea(); // 更新监控区域
+            var trayRect = GetTrayIconRect();
+            // 仅更新位置，不显示窗口
+            if (_dropWindow != null)
+            {
+                _dropWindow.Left = trayRect.X;
+                _dropWindow.Top = trayRect.Y;
+                _dropWindow.Width = trayRect.Width;
+                _dropWindow.Height = trayRect.Height;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 处理文件拖放事件
+        /// </summary>
+        private void OnFileDropped(string[] files)
+        {
+            string? audioFilePath = null; // 记录找到的音频文件路径
+
+            // 处理所有文件
+            foreach (var filePath in files)
+            {
+                if (Directory.Exists(filePath))
+                {
+                    // 启动文件夹处理任务
+                    _ = _fileTransferManager.ProcessFolderDrop(filePath);
+                }
+                else
+                {
+                    // 处理单个文件，但不自动播放音频
+                    var (success, audioPath) = _fileTransferManager.ProcessSingleFileDrop(filePath, false);
+
+                    // 如果是音频文件且还没有找到音频文件，则记录这个文件
+                    if (success && audioPath != null && audioFilePath == null)
+                    {
+                        audioFilePath = audioPath;
+                    }
+                }
+            }
+
+            // 如果有音频文件，则播放它
+            if (audioFilePath != null)
+            {
+                // 使用Dispatcher确保在UI线程上播放
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    _mainWindow.HandleMusicFileDrop(audioFilePath);
+                });
+            }
+
+            // 文件接收完成后，隐藏拖放窗口并重置拖拽状态
+            _dropWindow?.Hide();
+            _isDraggingFromOutside = false;
+        }
+
+        /// <summary>
+        /// 切换显示时长
+        /// </summary>
+        private void ToggleDisplayDuration()
+        {
+            // 切换图片和视频壁纸的显示时长
+            RegistryManager.TimerState newState = _mainWindow.CycleTimerState();
+
+            // 播放提示音
+            PlayNotificationSound();
+
+            // 显示气泡通知
+            _notifyIcon.ShowBalloonTip(
+                3000,  // 显示3秒
+                "壁纸切换频率",
+                $"已切换为: {GetTimerStateText(newState)}",
+                ToolTipIcon.Info
+            );
+
+            // 更新托盘图标提示文本以便鼠标悬停时显示
+            _notifyIcon.Text = $"LuckyStars - 当前壁纸切换频率: {GetTimerStateText(newState)}";
+        }
+
+        /// <summary>
+        /// 退出应用程序
+        /// </summary>
+        private void ExitApplication()
+        {
+            // 先清理通知图标
+            Dispose();
+
+            // 退出程序
+            System.Windows.Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// 显示托盘图标
+        /// </summary>
+        public void Show()
+        {
+            _notifyIcon.Visible = true;
+        }
+
+        /// <summary>
+        /// 隐藏托盘图标
+        /// </summary>
+        public void Hide()
+        {
+            _notifyIcon.Visible = false;
+        }
+
+        /// <summary>
+        /// 播放通知提示音
+        /// </summary>
+        private void PlayNotificationSound()
+        {
+            // 使用系统默认的通知提示音
+            SystemSounds.Asterisk.Play();
+        }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        public void Dispose()
+        {
+            if (_clickTimer != null)
+            {
+                _clickTimer.Stop();
+                _clickTimer.Dispose();
+                _clickTimer = null;
+            }
+
+            _notifyIcon?.Dispose();
+            _dropWindow?.Close();
+            _detectionZoneWindow?.Close();
+        }
+    }
+}

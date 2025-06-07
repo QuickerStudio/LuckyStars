@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+
+    <!-- 允许不安全代码 -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- 启用LibraryImport特性 -->
+    <EnablePreviewFeatures>true</EnablePreviewFeatures>
+
+    <!-- 使用稳定的C# 12语言版本 -->
+    <LangVersion>12.0</LangVersion>
+
+    <!-- 应用程序图标 -->
+    <ApplicationIcon>Resource\UI\Logo.ico</ApplicationIcon>
+
+    <!-- Windows 10兼容性设置 -->
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+
+    <!-- 优化设置 -->
+    <Optimize>true</Optimize>
+    <DebugType>embedded</DebugType>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+    <!-- 应用程序版本信息 -->
+    <Version>2.1.0.5</Version>
+    <Authors>QuickerStudio</Authors>
+    <Description>A little lucky star, lighting up a piece of the night sky for you!</Description>
+    <Copyright>Copyright © QuickerStudio 2025</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\UI\Logo.ico" />
+    <None Remove="Resource\UI\OS.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\UI\Logo.ico" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3124.44" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+    <PackageReference Include="WebView2.Runtime.X64" Version="134.0.3124.72" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.106" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- 添加特定于Windows 10的配置 -->
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishSingleFile>false</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\LuckyStarsWallpaper\LuckyStars.png" />
+    <EmbeddedResource Include="Resource\UI\app.ico" />
+    <EmbeddedResource Include="Resource\UI\Logo.ico" />
+    <EmbeddedResource Include="Resource\UI\OS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LuckyStars.png" />
+  </ItemGroup>
+
+
+</Project>

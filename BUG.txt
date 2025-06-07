@@ -1,0 +1,171 @@
+修复索引C:\Users\Quick\Desktop\LuckyStars\Managers\FileSystemMonitor.cs在扫描到文件夹变化后没有生成文件列表，是把索引的文件列表把应的文件传递给对应的播放器。
+修复拖拽音乐文件为当FileSystemMonitor.cs监测到最新的音乐文件后加入索引队列，把最新加入的音乐传递给音乐播放器。
+音乐播放器只播放一首音乐，不重复启动音乐
+播放音乐：无法切换。
+切换视频没有过度有黑屏！ 
+
+
+
+private async Task ProcessFolderDrop(string folderPath)
+        {
+            try
+            {
+                // 初始化目标文件夹索引
+                InitializeTargetFolderIndex();
+
+                // 获取所有支持的文件
+                var supportedExtensions = new[] { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".mp4", ".avi", ".mkv", ".webm", ".mov", ".mp3", ".wav", ".ogg", ".flac", ".aac", ".wma" };
+                var filesToTransfer = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
+                    .Where(f => supportedExtensions.Contains(Path.GetExtension(f).ToLowerInvariant()))
+                    .ToList();
+
+                if (filesToTransfer.Count == 0)
+                {
+                    ShowNotification("没有找到支持的文件", "拖放的文件夹中没有找到支持的文件格式。");
+                    return;
+                }
+
+                // 创建传输进度索引
+                transferInProgress.Clear();
+                foreach (var file in filesToTransfer)
+                {
+                    transferInProgress[file] = false;
+                }
+
+                // 创建取消令牌源
+                transferCancellationSource = new CancellationTokenSource();
+
+                // 创建进度报告对象
+                var progress = new Progress<(string file, bool success)>(report =>
+                {
+                    transferInProgress[report.file] = report.success;
+                    UpdateTransferProgress();
+                });
+
+                // 开始异步传输
+                await Task.Run(() => TransferFilesAsync(filesToTransfer, progress, transferCancellationSource.Token));
+
+                // 检查是否有音乐文件被传输
+                bool hasMusicFile = filesToTransfer.Any(f => new[] { ".mp3", ".wav", ".ogg", ".flac", ".aac", ".wma" }
+                    .Contains(Path.GetExtension(f).ToLowerInvariant()));
+
+                if (hasMusicFile)
+                {
+                    string firstMusicFile = filesToTransfer.First(f => new[] { ".mp3", ".wav", ".ogg", ".flac", ".aac", ".wma" }
+                        .Contains(Path.GetExtension(f).ToLowerInvariant()));
+                    _mainWindow?.HandleMusicFileDrop(firstMusicFile);
+                }
+
+                ShowNotification("传输完成", $"成功传输 {filesToTransfer.Count} 个文件。");
+            }
+            catch (OperationCanceledException)
+            {
+                ShowNotification("传输已取消", "文件传输已被取消。");
+            }
+            catch (Exception ex)
+            {
+                ShowNotification("传输错误", $"传输过程中发生错误: {ex.Message}");
+            }
+            finally
+            {
+                // 清理资源
+                transferInProgress.Clear();
+                if (transferCancellationSource != null)
+                {
+                    transferCancellationSource.Dispose();
+                    transferCancellationSource = null;
+                }
+            }
+        }
+
+        private async Task TransferFilesAsync(List<string> files, IProgress<(string file, bool success)> progress, CancellationToken cancellationToken)
+        {
+            var targetFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "LuckyStarsWallpaper");
+            var tasks = new List<Task>();
+
+            foreach (var file in files)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                    break;
+
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        string fileName = Path.GetFileName(file);
+                        if (!targetFolderIndex.ContainsKey(fileName))
+                        {
+                            string destFile = Path.Combine(targetFolder, fileName);
+                            File.Copy(file, destFile, true);
+                            targetFolderIndex[fileName] = true;
+                            progress.Report((file, true));
+                        }
+                        else
+                        {
+                            progress.Report((file, false));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"传输文件 {file} 失败: {ex.Message}");
+                        progress.Report((file, false));
+                    }
+                }, cancellationToken));
+            }
+
+            await Task.WhenAll(tasks);
+        }
+
+        private void UpdateTransferProgress()
+        {
+            int total = transferInProgress.Count;
+            int completed = transferInProgress.Count(kvp => kvp.Value);
+            int progress = total > 0 ? (completed * 100) / total : 0;
+
+            // 只在传输完成时显示提示
+            if (progress == 100)
+            {
+                ShowNotification("传输完成", $"成功传输 {total} 个文件");
+            }
+        }
+
+        private void ShowNotification(string title, string message)
+        {
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.ShowBalloonTip(3000, title, message, ToolTipIcon.Info);
+            }
+        }
+
+        private void OnFileDropped(string[] files)
+        {
+            try
+            {
+                foreach (var filePath in files)
+                {
+                    if (Directory.Exists(filePath))
+                    {
+                        // 启动文件夹处理任务
+                        _ = ProcessFolderDrop(filePath);
+                    }
+                    else
+                    {
+                        // 处理单个文件
+                        string fileName = Path.GetFileName(filePath);
+                        string targetFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "LuckyStarsWallpaper");
+                        string destFile = Path.Combine(targetFolder, fileName);
+
+                        if (!targetFolderIndex.ContainsKey(fileName))
+                        {
+                            File.Copy(filePath, destFile, true);
+                            targetFolderIndex[fileName] = true;
+
+                            // 检查是否为音乐文件
+                            string extension = Path.GetExtension(filePath).ToLowerInvariant();
+                            if (new[] { ".mp3", ".wav", ".ogg", ".flac", ".aac", ".wma" }.Contains(extension))
+                            {
+                                _mainWindow?.HandleMusicFileDrop(destFile);
+                            }
+                        }
+                    }
+                }

@@ -1,0 +1,1876 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
+    <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
+    <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Quick\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
+    <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.14.0</NuGetToolVersion>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <SourceRoot Include="C:\Users\Quick\.nuget\packages\" />
+    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\134.0.3124.72.manifest" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\134.0.3124.72.manifest')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\134.0.3124.72.manifest</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\134.0.3124.72.manifest</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\AdSelectionAttestationsPreloaded\ad-selection-attestations.dat" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\AdSelectionAttestationsPreloaded\ad-selection-attestations.dat')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\AdSelectionAttestationsPreloaded\ad-selection-attestations.dat</TargetPath>
+      <DestinationSubDirectory>WebView2\AdSelectionAttestationsPreloaded\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\AdSelectionAttestationsPreloaded\ad-selection-attestations.dat</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\AdSelectionAttestationsPreloaded\manifest.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\AdSelectionAttestationsPreloaded\manifest.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\AdSelectionAttestationsPreloaded\manifest.json</TargetPath>
+      <DestinationSubDirectory>WebView2\AdSelectionAttestationsPreloaded\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\AdSelectionAttestationsPreloaded\manifest.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EBWebView\x64\EmbeddedBrowserWebView.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EBWebView\x64\EmbeddedBrowserWebView.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\EBWebView\x64\EmbeddedBrowserWebView.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\EBWebView\x64\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\EBWebView\x64\EmbeddedBrowserWebView.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EBWebView\x86\EmbeddedBrowserWebView.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EBWebView\x86\EmbeddedBrowserWebView.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\EBWebView\x86\EmbeddedBrowserWebView.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\EBWebView\x86\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\EBWebView\x86\EmbeddedBrowserWebView.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Edge.dat" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Edge.dat')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Edge.dat</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Edge.dat</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EdgeWebView.dat" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\EdgeWebView.dat')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\EdgeWebView.dat</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\EdgeWebView.dat</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Extensions\external_extensions.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Extensions\external_extensions.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Extensions\external_extensions.json</TargetPath>
+      <DestinationSubDirectory>WebView2\Extensions\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Extensions\external_extensions.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\af.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\af.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\af.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\af.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\am.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\am.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\am.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\am.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ar.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ar.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ar.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ar.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\as.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\as.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\as.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\as.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\az.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\az.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\az.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\az.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bg.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bg.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\bg.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\bg.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bn-IN.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bn-IN.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\bn-IN.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\bn-IN.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bs.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\bs.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\bs.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\bs.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ca-Es-VALENCIA.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ca-Es-VALENCIA.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ca-Es-VALENCIA.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ca-Es-VALENCIA.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ca.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ca.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ca.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ca.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\cs.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\cs.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\cs.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\cs.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\cy.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\cy.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\cy.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\cy.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\da.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\da.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\da.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\da.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\de.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\de.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\de.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\de.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\el.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\el.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\el.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\el.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\en-GB.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\en-GB.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\en-GB.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\en-GB.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\en-US.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\en-US.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\en-US.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\en-US.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\es-419.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\es-419.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\es-419.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\es-419.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\es.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\es.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\es.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\es.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\et.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\et.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\et.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\et.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\eu.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\eu.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\eu.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\eu.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fa.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fa.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\fa.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\fa.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fi.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fi.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\fi.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\fi.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fil.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fil.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\fil.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\fil.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fr-CA.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fr-CA.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\fr-CA.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\fr-CA.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fr.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\fr.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\fr.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\fr.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ga.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ga.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ga.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ga.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gd.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gd.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\gd.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\gd.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gl.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gl.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\gl.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\gl.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gu.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\gu.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\gu.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\gu.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\he.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\he.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\he.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\he.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hi.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hi.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\hi.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\hi.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hr.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hr.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\hr.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\hr.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hu.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\hu.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\hu.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\hu.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\id.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\id.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\id.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\id.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\is.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\is.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\is.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\is.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\it.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\it.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\it.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\it.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ja.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ja.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ja.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ja.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ka.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ka.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ka.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ka.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kk.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kk.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\kk.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\kk.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\km.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\km.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\km.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\km.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kn.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kn.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\kn.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\kn.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ko.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ko.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ko.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ko.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kok.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\kok.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\kok.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\kok.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lb.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lb.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\lb.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\lb.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lo.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lo.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\lo.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\lo.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lt.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lt.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\lt.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\lt.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lv.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\lv.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\lv.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\lv.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mi.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mi.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\mi.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\mi.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mk.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mk.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\mk.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\mk.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ml.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ml.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ml.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ml.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mr.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mr.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\mr.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\mr.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ms.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ms.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ms.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ms.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mt.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\mt.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\mt.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\mt.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nb.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nb.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\nb.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\nb.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ne.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ne.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ne.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ne.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nl.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nl.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\nl.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\nl.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nn.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\nn.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\nn.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\nn.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\or.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\or.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\or.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\or.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pa.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pa.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\pa.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\pa.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pl.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pl.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\pl.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\pl.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pt-BR.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pt-BR.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\pt-BR.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\pt-BR.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pt-PT.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\pt-PT.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\pt-PT.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\pt-PT.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\qu.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\qu.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\qu.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\qu.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ro.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ro.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ro.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ro.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ru.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ru.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ru.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ru.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sk.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sk.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sk.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sk.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sl.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sl.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sl.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sl.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sq.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sq.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sq.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sq.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr-Cyrl-BA.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr-Cyrl-BA.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sr-Cyrl-BA.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sr-Cyrl-BA.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr-Latn-RS.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr-Latn-RS.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sr-Latn-RS.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sr-Latn-RS.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sr.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sr.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sr.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sv.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\sv.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\sv.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\sv.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ta.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ta.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ta.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ta.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\te.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\te.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\te.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\te.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\th.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\th.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\th.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\th.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\tr.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\tr.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\tr.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\tr.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\tt.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\tt.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\tt.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\tt.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ug.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ug.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ug.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ug.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\uk.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\uk.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\uk.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\uk.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ur.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\ur.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\ur.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\ur.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\vi.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\vi.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\vi.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\vi.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\zh-CN.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\zh-CN.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\zh-CN.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\zh-CN.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\zh-TW.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Locales\zh-TW.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Locales\zh-TW.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\Locales\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Locales\zh-TW.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\MEIPreload\manifest.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\MEIPreload\manifest.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\MEIPreload\manifest.json</TargetPath>
+      <DestinationSubDirectory>WebView2\MEIPreload\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\MEIPreload\manifest.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\MEIPreload\preloaded_data.pb" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\MEIPreload\preloaded_data.pb')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\MEIPreload\preloaded_data.pb</TargetPath>
+      <DestinationSubDirectory>WebView2\MEIPreload\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\MEIPreload\preloaded_data.pb</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\PdfPreview\PdfPreviewHandler.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\PdfPreview\PdfPreviewHandler.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\PdfPreview\PdfPreviewHandler.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\PdfPreview\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\PdfPreview\PdfPreviewHandler.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Advertising" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Advertising')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Advertising</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Advertising</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Analytics" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Analytics')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Analytics</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Analytics</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\CompatExceptions" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\CompatExceptions')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\CompatExceptions</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\CompatExceptions</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Content" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Content')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Content</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Content</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Cryptomining" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Cryptomining')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Cryptomining</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Cryptomining</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Entities" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Entities')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Entities</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Entities</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Fingerprinting" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Fingerprinting')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Fingerprinting</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Fingerprinting</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\LICENSE" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\LICENSE')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\LICENSE</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\LICENSE</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Other" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Other')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Other</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Other</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Social" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\Social')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\Social</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\Social</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\TransparentAdvertisers" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Mu\TransparentAdvertisers')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Mu\TransparentAdvertisers</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Mu\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Mu\TransparentAdvertisers</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Advertising" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Advertising')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Advertising</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Advertising</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Analytics" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Analytics')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Analytics</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Analytics</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Content" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Content')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Content</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Content</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Cryptomining" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Cryptomining')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Cryptomining</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Cryptomining</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Entities" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Entities')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Entities</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Entities</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Fingerprinting" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Fingerprinting')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Fingerprinting</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Fingerprinting</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\LICENSE" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\LICENSE')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\LICENSE</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\LICENSE</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Other" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Other')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Other</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Other</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Social" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Social')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Social</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Social</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Staging" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\Sigma\Staging')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\Sigma\Staging</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\Sigma\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\Sigma\Staging</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\manifest.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\Trust Protection Lists\manifest.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\Trust Protection Lists\manifest.json</TargetPath>
+      <DestinationSubDirectory>WebView2\Trust Protection Lists\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\Trust Protection Lists\manifest.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\WidevineCdm\_platform_specific\win_x64\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig</TargetPath>
+      <DestinationSubDirectory>WebView2\WidevineCdm\_platform_specific\win_x64\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\WidevineCdm\_platform_specific\win_x64\widevinecdm.dll.sig</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\manifest.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\WidevineCdm\manifest.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\WidevineCdm\manifest.json</TargetPath>
+      <DestinationSubDirectory>WebView2\WidevineCdm\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\WidevineCdm\manifest.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\concrt140.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\concrt140.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\concrt140.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\concrt140.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\d3dcompiler_47.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\d3dcompiler_47.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\d3dcompiler_47.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\d3dcompiler_47.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\delegatedWebFeatures.sccd" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\delegatedWebFeatures.sccd')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\delegatedWebFeatures.sccd</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\delegatedWebFeatures.sccd</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dual_engine_adapter_x64.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dual_engine_adapter_x64.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\dual_engine_adapter_x64.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\dual_engine_adapter_x64.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dxcompiler.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dxcompiler.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\dxcompiler.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\dxcompiler.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dxil.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\dxil.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\dxil.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\dxil.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\edge_feedback\camera_mf_trace.wprp" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\edge_feedback\camera_mf_trace.wprp')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\edge_feedback\camera_mf_trace.wprp</TargetPath>
+      <DestinationSubDirectory>WebView2\edge_feedback\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\edge_feedback\camera_mf_trace.wprp</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\edge_feedback\mf_trace.wprp" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\edge_feedback\mf_trace.wprp')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\edge_feedback\mf_trace.wprp</TargetPath>
+      <DestinationSubDirectory>WebView2\edge_feedback\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\edge_feedback\mf_trace.wprp</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\elevated_tracing_service.exe" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\elevated_tracing_service.exe')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\elevated_tracing_service.exe</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\elevated_tracing_service.exe</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\eventlog_provider.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\eventlog_provider.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\eventlog_provider.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\eventlog_provider.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\ffmpeg.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\ffmpeg.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\ffmpeg.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\ffmpeg.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\icudtl.dat" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\icudtl.dat')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\icudtl.dat</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\icudtl.dat</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\learning_tools.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\learning_tools.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\learning_tools.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\learning_tools.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\libEGL.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\libEGL.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\libEGL.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\libEGL.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\libGLESv2.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\libGLESv2.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\libGLESv2.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\libGLESv2.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\microsoft_shell_integration.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\microsoft_shell_integration.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\microsoft_shell_integration.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\microsoft_shell_integration.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mip_core.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mip_core.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\mip_core.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\mip_core.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mip_protection_sdk.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mip_protection_sdk.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\mip_protection_sdk.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\mip_protection_sdk.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge.dll.sig" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge.dll.sig')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge.dll.sig</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge.dll.sig</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_100_percent.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_100_percent.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge_100_percent.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge_100_percent.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_200_percent.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_200_percent.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge_200_percent.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge_200_percent.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_elf.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_elf.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge_elf.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge_elf.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_wer.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedge_wer.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedge_wer.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedge_wer.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedgewebview2.exe" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedgewebview2.exe')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedgewebview2.exe</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedgewebview2.exe</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedgewebview2.exe.sig" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msedgewebview2.exe.sig')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msedgewebview2.exe.sig</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msedgewebview2.exe.sig</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mspdf.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\mspdf.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\mspdf.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\mspdf.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msvcp140.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msvcp140.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msvcp140.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msvcp140.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msvcp140_codecvt_ids.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\msvcp140_codecvt_ids.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\msvcp140_codecvt_ids.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\msvcp140_codecvt_ids.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\notification_helper.exe" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\notification_helper.exe')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\notification_helper.exe</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\notification_helper.exe</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\oneauth.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\oneauth.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\oneauth.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\oneauth.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\oneds.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\oneds.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\oneds.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\oneds.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\onnxruntime.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\onnxruntime.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\onnxruntime.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\onnxruntime.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\onramp.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\onramp.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\onramp.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\onramp.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\prefs_enclave_x64.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\prefs_enclave_x64.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\prefs_enclave_x64.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\prefs_enclave_x64.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\resources.pak" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\resources.pak')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\resources.pak</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\resources.pak</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\show_third_party_software_licenses.bat" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\show_third_party_software_licenses.bat')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\show_third_party_software_licenses.bat</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\show_third_party_software_licenses.bat</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\telclient.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\telclient.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\telclient.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\telclient.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\v8_context_snapshot.bin" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\v8_context_snapshot.bin')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\v8_context_snapshot.bin</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\v8_context_snapshot.bin</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vccorlib140.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vccorlib140.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vccorlib140.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vccorlib140.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vcruntime140.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vcruntime140.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vcruntime140.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vcruntime140.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vcruntime140_1.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vcruntime140_1.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vcruntime140_1.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vcruntime140_1.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vk_swiftshader.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vk_swiftshader.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vk_swiftshader.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vk_swiftshader.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vk_swiftshader_icd.json" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vk_swiftshader_icd.json')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vk_swiftshader_icd.json</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vk_swiftshader_icd.json</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vulkan-1.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\vulkan-1.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\vulkan-1.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\vulkan-1.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\wdag.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\wdag.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\wdag.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\wdag.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\webview2_integration.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\webview2_integration.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\webview2_integration.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\webview2_integration.dll</Link>
+    </None>
+    <None Include="$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\wns_push_client.dll" Condition="Exists('$(NuGetPackageRoot)webview2.runtime.x64\134.0.3124.72\contentFiles\any\any\WebView2\wns_push_client.dll')">
+      <NuGetPackageId>WebView2.Runtime.X64</NuGetPackageId>
+      <NuGetPackageVersion>134.0.3124.72</NuGetPackageVersion>
+      <NuGetItemType>None</NuGetItemType>
+      <Pack>false</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>WebView2\wns_push_client.dll</TargetPath>
+      <DestinationSubDirectory>WebView2\</DestinationSubDirectory>
+      <Private>True</Private>
+      <Link>WebView2\wns_push_client.dll</Link>
+    </None>
+  </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.win32metadata\60.0.34-preview\buildTransitive\netstandard1.0\Microsoft.Windows.SDK.Win32Metadata.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.win32metadata\60.0.34-preview\buildTransitive\netstandard1.0\Microsoft.Windows.SDK.Win32Metadata.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.wdk.win32metadata\0.11.4-experimental\buildTransitive\netstandard1.0\Microsoft.Windows.WDK.Win32Metadata.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.wdk.win32metadata\0.11.4-experimental\buildTransitive\netstandard1.0\Microsoft.Windows.WDK.Win32Metadata.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.win32docs\0.1.42-alpha\buildTransitive\netstandard1.0\Microsoft.Windows.SDK.Win32Docs.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.win32docs\0.1.42-alpha\buildTransitive\netstandard1.0\Microsoft.Windows.SDK.Win32Docs.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.windows.cswin32\0.3.106\build\netstandard1.0\Microsoft.Windows.CsWin32.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.cswin32\0.3.106\build\netstandard1.0\Microsoft.Windows.CsWin32.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\Quick\.nuget\packages\microsoft.web.webview2\1.0.3124.44</PkgMicrosoft_Web_WebView2>
+    <PkgMicrosoft_Windows_CsWin32 Condition=" '$(PkgMicrosoft_Windows_CsWin32)' == '' ">C:\Users\Quick\.nuget\packages\microsoft.windows.cswin32\0.3.106</PkgMicrosoft_Windows_CsWin32>
+  </PropertyGroup>
+</Project>
